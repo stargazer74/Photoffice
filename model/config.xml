@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<DatabaseServer>localhost</DatabaseServer>
+	<DatabaseUser></DatabaseUser>
+	<DatabasePassphrase></DatabasePassphrase>
+	<DatabaseName></DatabaseName>
+	<SerialNumber></SerialNumber>
+	<VersionNumber>1.0.2.1</VersionNumber>
+	<XmlRpcString>http://www.photoffice.de/photofficevalidate.html</XmlRpcString></config>

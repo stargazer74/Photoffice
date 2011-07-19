@@ -1,0 +1,7 @@
+RewriteEngine on
+Options +FollowSymlinks
+
+RewriteBase /photoffice
+ErrorDocument 404 /photoffice/login.html
+RewriteRule ^index.html$ index.php
+RewriteRule ^([a-z]+)?.html$ index.php?controller=$1

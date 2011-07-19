@@ -1,0 +1,891 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body {
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	background-color: #363636;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #828282;
+}
+
+h2 {
+	padding: 0px;
+	margin: 0px;
+}
+
+h3{
+	font-weight: bold;
+	font-size: small;
+	padding: 0px;
+	margin: 0px;
+}
+
+td {
+	padding: 3px;
+}
+
+a {
+	border: none;
+}
+
+a:link, a:visited {
+	color: #828282;	
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.border {
+	border: solid 1px #626262;
+}
+
+.lightbackground {
+	background-color: #444444;
+}
+
+.autowidth {
+	width: auto;
+}
+
+.width_100 {
+	width: 100%;
+}
+
+.padding_10 {
+	padding: 10px;
+}
+
+.padding_30 {
+	padding: 30px;
+}
+
+.margin_10 {
+	margin: 10px;
+}
+
+.margin_top_10 {
+	margin-top: 10px;
+}
+
+.margin_bottom_10 {
+	margin-bottom: 10px;
+}
+
+.margin_left_10 {
+	margin-left: 10px;
+}
+
+.margin_right_10 {
+	margin-right: 10px;
+}
+
+.border_bottom_dotted {
+	border-bottom: dotted 1px #626262;
+}
+
+.border_left_1 {
+	border-left: solid 1px #626262;
+}
+
+.float_left {
+	float: left;
+}
+
+.float_right {
+	float: right;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.large {
+	font-size: large;
+}
+
+.x_small {
+	font-size: x-small;
+}
+
+img {
+	border: none;
+}
+
+.mouseoverhand {
+	 cursor: pointer;
+}
+
+ul.listeohnedeco {
+	list-style-position:outside
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+#logo_banner {
+	background-image: url(../images/logo_background.jpg);
+	background-repeat: repeat-x;
+	height: 95px;
+	width: 100%;
+	border-bottom: solid 1px #616161;
+}
+#logo {
+	background-image: url(../images/logo.png);
+	background-repeat: no-repeat;
+	height: 95px;
+	width: 193px;
+	margin-left: 70px;
+}
+
+#version_number {
+	color: #999999;
+	font-size: smaller;
+	padding-top: 56px;
+	padding-left: 98px;
+}
+
+#cambackground {
+	width: 264px;
+	height: 300px;
+	background-image: url(../images/camera.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	margin-top: 100px;
+	position: absolute;
+	left: 50%;
+	margin-left: -132px;
+}
+
+/*********************************************************************
+/*
+/* Forms
+/*
+/*********************************************************************/
+.form {
+	font-size: x-small;
+	background-color: none;
+	background: none;
+	border: solid 1px #626262;
+	color: #828282;
+	padding: 3px;
+
+}
+
+.error {
+	color: #f52300;
+}
+
+.formlabel {
+	font-weight: bold;
+}
+
+a.delete_button:link, a.delete_button:visited{
+	background-image: url(../images/delete.png);
+	height: 16px;
+	width: 16px;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	top: 2px;
+}
+
+a.delete_button:hover{
+	background-position: 0px -16px;
+}
+
+a.mail_button:link, a.mail_button:visited{
+	background-image: url(../images/mail.png);
+	height: 16px;
+	width: 16px;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	top: 2px;
+}
+
+a.mail_button:hover{
+	background-position: 0px -16px;
+}
+
+a.finished {
+	background-image: url(../images/ok.png);
+	height: 16px;
+	width: 16px;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	top: 2px;
+	cursor: default;
+}
+
+a.update_button:link, a.update_button:visited{
+	background-image: url(../images/update.png);
+	height: 16px;
+	width: 16px;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	top: 2px;
+	right: 0px;
+}
+
+a.update_button:hover{
+	background-position: 0px -16px;
+}
+
+ul.aufzaehlungsliste {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.aufzaehlungsliste li {
+	height: 20px;
+}
+/*********************************************************************
+/*
+/* Start und Navigation
+/*
+/*********************************************************************/
+#main_navigation {
+	width: 200px;
+	height: 100%;
+	border-right: solid 1px #626262;
+	float: left;
+}
+
+a#bilder:link, a#bilder:visited{
+	display: block;
+	background-image: url(../images/mainnavi_bilder_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-color: #FF0000;
+	visibility: visible;
+}
+
+a#bilder:hover{
+	background-position: 0px -57px;
+}
+
+a#bilder_no_button {
+	background-image: url(../images/mainnavi_bilder_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	display: block;
+	cursor: text;
+}
+
+a#galerien:link, a#galerien:visited{
+	display: block;
+	background-image: url(../images/mainnavi_galerien_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-color: #FF0000;
+	visibility: visible;
+}
+
+a#galerien:hover{
+	background-position: 0px -57px;
+}
+
+a#galerien_no_button {
+	background-image: url(../images/mainnavi_galerien_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	display: block;
+	cursor: text;
+}
+
+a#preisliste:link, a#preisliste:visited{
+	display: block;
+	background-image: url(../images/mainnavi_preisliste_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-color: #FF0000;
+	visibility: visible;
+}
+
+a#preisliste:hover{
+	background-position: 0px -57px;
+}
+
+a#preisliste_no_button {
+	background-image: url(../images/mainnavi_preisliste_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	display: block;
+	cursor: text;
+}
+
+a#hilfe:link, a#hilfe:visited{
+	display: block;
+	background-image: url(../images/mainnavi_hilfe_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-color: #FF0000;
+	visibility: visible;
+}
+
+a#hilfe:hover{
+	background-position: 0px -57px;
+}
+
+a#kundenagb:link, a#kundenagb:visited{
+	display: block;
+	background-image: url(../images/mainnavi_agb_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-color: #FF0000;
+	visibility: visible;
+}
+
+a#kundenagb:hover{
+	background-position: 0px -57px;
+}
+
+a#kundenagb_no_button {
+	background-image: url(../images/mainnavi_agb_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	display: block;
+	cursor: text;
+}
+
+a#homepage:link, a#fotografen:visited {
+	display: block;
+	background-image: url(../images/mainnavi_galerien_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+}
+
+a#homepage:hover {
+	background-position: 0px -57px;
+}
+
+a#homepage_no_button {
+	display: block;
+	background-image: url(../images/mainnavi_homepage_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	cursor: text;
+}
+
+a#kunden:link, a#kunden:visited {
+	display: block;
+	background-image: url(../images/mainnavi_kunden_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+}
+
+a#kunden:hover {
+	background-position: 0px -57px;
+}
+
+a#kunden_no_button {
+	display: block;
+	background-image: url(../images/mainnavi_kunden_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	cursor: text;
+}
+
+a#firma:link, a#firma:visited {
+	display: block;
+	background-image: url(../images/mainnavi_firma_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+}
+
+a#firma:hover {
+	background-position: 0px -57px;
+}
+
+a#firma_no_button {
+	display: block;
+	background-image: url(../images/mainnavi_firma_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	cursor: text;
+}
+
+a#abmelden:link, a#abmelden:visited {
+	display: block;
+	background-image: url(../images/mainnavi_abmelden_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+}
+
+a#abmelden:hover {
+	background-position: 0px -57px;
+}
+
+a#bestellungen:link, a#bestellungen:visited {
+	display: block;
+	background-image: url(../images/mainnavi_bestellungen_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+}
+
+a#bestellungen:hover {
+	background-position: 0px -57px;
+}
+
+a#bestellungen_no_button {
+	display: block;
+	background-image: url(../images/mainnavi_bestellungen_button.jpg);
+	height: 57px;
+	width: 200px;
+	border-bottom: solid 2px #242324;
+	background-position: 0px -114px;
+	cursor: text;
+}
+/*********************************************************************
+/*
+/* Tabs
+/*
+/*********************************************************************/
+
+.css-tabs {
+	
+}
+
+ul.css-tabs a{
+	font-size: x-small;
+	font-weight: bold;
+	display: block;
+	text-decoration: none;
+	margin-right: 2px;
+	border: solid 1px #616161;
+	padding: 5px;
+	background-image: url(../images/tab_background.jpg);
+}
+
+ul.css-tabs a:hover{
+	background-position: 0px -22px;
+}
+
+ul.css-tabs a.current, ul.css-tabs a.current:hover, ul.css-tabs li.current a {
+	background-position: 0px -22px;	
+	cursor:default !important; 
+	border-bottom: 0px;
+}
+
+ul.css-tabs {
+	margin:0 !important;
+	padding: 10px;
+}
+
+ul.css-tabs  li {
+	float: left;
+	margin:0 !important;
+	padding: 0;
+}
+
+.css-tabs{
+	list-style-type: none;
+}
+
+div.css-panes {
+}
+
+div.css-panes p {
+	display: block;
+	text-align: left;
+}
+
+div.panes div.pane {
+	display:none;		
+}
+
+/*********************************************************************
+/*
+/* Login
+/*
+/*********************************************************************/
+
+
+#aeussere_loginbox {
+	width: 600px;
+	height: 350px;
+	border: solid 1px #626262;
+	margin-top: 100px;
+	position: relative;
+	left: 50%;
+	margin-left: -300px;
+}
+
+#loginbox_innen_left {
+	width: 160px;
+	height: 260px;
+	font-size:smaller;
+	padding: 20px;
+	float: left;
+}
+
+#login_sign {
+	width: 64px;
+	height: 64px;
+	background-image: url(../images/lock.png);
+	background-repeat: no-repeat;
+	margin-left: 40px;
+	margin-top: 10px;
+}
+
+#loginbox_innen_right {
+	width: 360px;
+	height: 260px;
+	float: left;
+	padding: 20px;
+}
+
+#little_loginbox {
+	width: 320px;
+	height: 210px;
+	background-color: #303030;
+	margin-top: 30px;
+	padding: 20px;
+	border: solid 1px #626262;
+}
+
+/*********************************************************************
+/*
+/* Statusbox
+/*
+/*********************************************************************/
+
+#statusbox {
+	width: 180px;
+	padding: 10px;
+	border-bottom: solid 1px #626262;
+}
+
+#usericon {
+	margin-right: 10px;
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/group_key.png);
+	float: left;
+}
+
+/*********************************************************************
+/*
+/* Informationbox
+/*
+/*********************************************************************/
+
+#informationbox {
+	position: absolute;
+	width: 250px;
+	height: 100%;
+	right: 0px;
+	float: right;
+}
+
+.klappbox {
+	width: 250px;
+	height: 25px;
+	background-image: url(../images/background_klappbox.jpg);
+	padding-bottom: 10px;
+}
+
+.fragezeichen {
+	width: 230px;
+	height: 190px;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	background-image: url(../images/fragezeichen.jpg);
+	background-repeat: no-repeat;
+}
+
+.klappbox_beschriftung {
+	height: 28px;
+	margin-right: 50px;
+	padding-top: 7px;
+	float: right;
+}
+
+/*********************************************************************
+/*
+/* Kunden
+/*
+/*********************************************************************/
+
+#box_kundensuche {
+	width: 210px;
+	height: 200px;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+#pagerlinks {
+	text-align: center;
+}
+
+#box_kundendaten {
+	width: 210px;
+	height: 230px;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+#box_kundengalerien {
+	width: 210px;
+	height: 170px;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+.kundenliste {
+	height: 16px; 
+	overflow:hidden; 
+	margin-left: 10px; 
+	margin: 2px;
+}
+
+#bestellungbox {
+	width: 210px;
+	height: auto;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+#warenkorbbox {
+	width: 210px;
+	height: auto;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+/*********************************************************************
+/*
+/* Contentblock
+/*
+/*********************************************************************/
+#content {
+	height: 100%;
+	margin-left: 201px;
+	margin-right: 251px;
+	/*background-color: #FF0000;*/
+
+}
+
+#uppernavibox {
+	background-color: #404040;
+	height: 42px;
+	padding-left: 30px;
+	padding-top: 15px;
+}
+
+a.breadcrumbnavi {
+	font-size: large;
+	font-weight: bold;
+}
+
+/*********************************************************************
+/*
+/* galerien
+/*
+/*********************************************************************/
+.outergallerybox {
+	width: 170px;
+	height: 220px;
+	text-align: center;
+	font-size: x-small;
+	background-color: #404040;
+}
+
+.galerieicon {
+	width: 118px; 
+	height: 118px;
+	margin-top: 25px;
+	margin-left: 25px;
+	background-color: #363636;
+}
+
+.galleryimage {
+	width: 118px;
+	height: 118px;
+	background-image: url(../images/galerieicon.jpg);
+	background-position: center;
+	background-color: #363636;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	vertical-align: middle;
+}
+
+.galleryimage a {
+	display: block;
+	width: 118px;
+	height: 118px;
+}
+
+#box_galerieeinstellungen {
+	width: 210px;
+	height: auto;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+#box_uploadbild {
+	width: 210px;
+	height: auto;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+#box_EXIF {
+	width: 210px;
+	height: 350px;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+a.delete_picture_button:link, a.delete_picture_button:visited{
+	background-image: url(../images/delete_picture.png);
+	height: 14px;
+	width: 14px;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	top: -168px;
+}
+
+a.delete_picture_button:hover{
+	background-position: 0px -14px;
+}
+
+.aeussere_bildbox {
+	text-align: center; 	
+	background-color: #404040; 
+	width: 150px; 
+	height: 170px;
+}
+
+.aeussere_bildbox div {
+	width: 120px; 
+	height: 120px;
+}
+
+.aeussere_bildbox_kunde {
+	text-align: center; 	
+	background-color: #404040; 
+	width: 150px; 
+	height: 210px;
+}
+
+.aeussere_bildbox_kunde div {
+	width: 120px; 
+	height: 120px;
+}
+
+.passepartout_bildicon {
+	background-color: #363636; 
+	margin-left: 14px; 
+	margin-top: 14px;
+}
+
+.innere_bildbox {
+	display: table-cell; 
+	vertical-align: middle;
+}
+
+.delete_picture_button_box {
+	width: 14px; height: 14px; position: relative; top: -168px; left: 036x;
+}
+
+a.delete_galerie_button:link, a.delete_galerie_button:visited{
+	background-image: url(../images/delete_picture.png);
+	height: 14px;
+	width: 14px;
+	position: relative;
+	display: block;
+	margin-left: auto;
+	top: -197px;
+}
+
+a.delete_galerie_button:hover{
+	background-position: 0px -14px;
+}
+
+/*********************************************************************
+/*
+/* Contentblock
+/*
+/*********************************************************************/
+#aeussere_loginbox_kunde {
+	width: 500px;
+	height: 200px;
+	border: solid 1px #626262;
+	margin-top: 100px;
+	position: relative;
+	left: 50%;
+	margin-left: -300px;
+}
+
+#loginbox_innen_left_kunde {
+	width: 160px;
+	height: 100px;
+	font-size:smaller;
+	padding: 20px;
+	float: left;
+}
+
+#loginbox_innen_right_kunde {
+	width: 260px;
+	height: 160px;
+	float: left;
+	padding: 20px;
+}
+
+#little_loginbox_kunde {
+	width: 220px;
+	height: 60px;
+	background-color: #303030;
+	margin-top: 30px;
+	padding: 20px;
+	border: solid 1px #626262;
+}
