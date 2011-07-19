@@ -81,7 +81,7 @@ class bestellungabschliessen_show_behavior implements showbehavior
 			
 			if ($mail_object->send($recipients, $headers, $body))
 			{
-				$bestellungtoupdate = new bestellung($aktuelleBestellung['id'], $aktuelleBestellung['idkunde'], $aktuelleBestellung['datum'], 1, 1, $aktuelleBestellung['bestellwert'], $aktuelleBestellung['bilder'], $aktuelleBestellung['anmerkung']);
+				$bestellungtoupdate = new bestellung($aktuelleBestellung['id'], $aktuelleBestellung['idkunde'], $aktuelleBestellung['datum'], 1, $aktuelleBestellung['bestellwert'], $aktuelleBestellung['bilder'], $aktuelleBestellung['anmerkung']);
 				$db->_update($bestellungtoupdate);	
 			}
 			header("Location:./bestellungabschliessen.html");			

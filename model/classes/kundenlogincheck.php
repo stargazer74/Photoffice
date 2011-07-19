@@ -4,7 +4,7 @@ class kundenlogincheck
 {
 	function __construct()
 	{
-		
+
 	}
 	public static function _chkKundenLogin($fields, $felder)
 	{
@@ -12,26 +12,22 @@ class kundenlogincheck
 		$database = new database();
 		$alleKundenInstance = $database->_getKunden();
 		$alleKundenArray = $alleKundenInstance->_ausgeben();
-		
+
 		$tmp = 0;
 		foreach($alleKundenArray as $logindata)
-		{			
+		{
 			if($logindata['passwort'] == md5($fields))
 			{
 				$tmp = 1;
 				$registryInstance->_setBenutzerName($logindata['vorname'], $logindata['nachname']);
 				$registryInstance->_setBenutzerID($logindata['id']);
-				$registryInstance->_registerGalerieID();
-				$registryInstance->_registerBildID();
-				$registryInstance->_registerPapiertypID();
-				$registryInstance->_registerBestellungID();
-				
+
 			}
 		}//end foreach
 		if($tmp == 1)
-		{			
+		{
 			return TRUE;
-			
+
 		}else{//end if
 			return FALSE;
 		}//end else

@@ -38,5 +38,20 @@ class bestellungen implements bestellungenInterface
 		}
 		return $bestellungen;
 	}
+	
+	public function _addBestellung($bestellung)
+	{
+		return false;
+	}
+	
+	public function _subBestellung($bestellung)
+	{
+		return false;
+	}
+	
+	public function _getDistinctPictureArray($bestellung)
+	{
+		return false;
+	}
 }
 ?>

@@ -26,7 +26,9 @@ class allekundengalerien_show_behavior implements showbehavior
 		$this->tpl->parseCurrentBlock();
 		
 		$this->tpl->addBlockfile('NAVIGATIONBLOCK', 'kundemainnaviblock', 'kundemainnavi.tpl');
-		$this->tpl->touchBlock('KUNDEMAINNAVI');		
+		$this->tpl->touchBlock('KUNDEMAINNAVI');	
+
+		
 		//Mainnavi
 		$this->tpl->setVariable('BUTTON_KUNDENGALERIEN', 'bilder_no_button');
 		$this->tpl->setVariable('BUTTON_KUNDENAGB', 'kundenagb');

@@ -33,6 +33,7 @@ class warenkorb_show_behavior implements showbehavior
 		{
 			$this->tpl->setVariable('GESAMTPREIS', '0.00');			
 		}else{
+			//@TODO hier darf nich mehr aus der DB ausgelesen werden
 			$distinctAktuelleBestellung = array();
 			foreach ($aktuelleBestellung['bilder'] as $bestellungdaten)
 			{

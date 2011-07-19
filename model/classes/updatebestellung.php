@@ -3,9 +3,9 @@ class updatebestellung extends database implements updateinterface
 {
 	public function __construct()
 	{
-		
+
 	}
-	
+
 	public function update($object)
 	{
 		$db = DBSINGLETON::_getDBInstance();
@@ -18,29 +18,29 @@ class updatebestellung extends database implements updateinterface
 		{
 			$field_values = array(	'Kunden_idKunden'		=> $bestellung['idkunde'],
 									'datum'					=> $bestellung['datum'],
-									'kundeabgeschlossen'	=> $bestellung['kundeabgeschlossen'],
 									'fotografabgeschlossen'	=> $bestellung['fotografabgeschlossen'],
 									'bestellwert'			=> $bestellung['bestellwert'],
 									'anmerkung'				=> $bestellung['anmerkung']);
-			
+
 			$res = $db->autoExecute($tablename, $field_values, DB_AUTOQUERY_UPDATE, 'idBestellung='.$bestellung['id']);
-	
+
 			if (PEAR::isError($res))
 			{
 				die($res->getMessage());
 			}
-			
+
 		}elseif (isset($_REQUEST['kundeabschliessen']) && $_REQUEST['kundeabschliessen'] == '1')
 		{
 			//print_r($bestellung);
+			//TODO Hier muss dass mit Kundeabgschlossen raus
 			$field_values = array('kundeabgeschlossen'	=> $bestellung['kundeabgeschlossen']);
 			if ($bestellung['anmerkung'] != '')
 			{
 				$field_values = array_merge($field_values, array('anmerkung' => $bestellung['anmerkung']));
 			}
-			
+
 			$res = $db->autoExecute($tablename, $field_values, DB_AUTOQUERY_UPDATE, 'idBestellung='.$_SESSION['bestellungid']);
-	
+
 			if (PEAR::isError($res))
 			{
 				if ($res->getMessage() == 'DB Error: syntax error');
@@ -49,9 +49,9 @@ class updatebestellung extends database implements updateinterface
 					die;
 				}
 			}
-			
+
 			$_SESSION['bestellungid'] = '';
-		}else{				
+		}else{
 			$databaseInstance = new database();
 			$alleBestellungenInstance = $databaseInstance->_getBestellungen();
 			$alleBestellungenArray = $alleBestellungenInstance->_ausgeben();
@@ -66,19 +66,17 @@ class updatebestellung extends database implements updateinterface
 			$bestellung['bestellwert'] += $aktuelleBestellung['bestellwert'];
 			$field_values = array(	'Kunden_idKunden'		=> $bestellung['idkunde'],
 									'datum'					=> $bestellung['datum'],
-									'kundeabgeschlossen'	=> $bestellung['kundeabgeschlossen'],
 									'fotografabgeschlossen'	=> $bestellung['fotografabgeschlossen'],
 									'bestellwert'			=> $bestellung['bestellwert']);
-			
+
 			$res = $db->autoExecute($tablename, $field_values, DB_AUTOQUERY_UPDATE, 'idBestellung='.$_SESSION['bestellungid']);
-	
+
 			if (PEAR::isError($res))
 			{
 				die($res->getMessage());
 			}
-	
+
 			$tablename = 'bestellung_has_bild';
-			//print_r($bestellung['bilder']);
 			foreach ($bestellung['bilder'] as $key => $data)
 			{
 				$field_values = array(	'Bild_idBild'						=> $data['id'],
@@ -86,9 +84,9 @@ class updatebestellung extends database implements updateinterface
 										'Anzahl'							=> $data['anzahlbilder'],
 										'Preis_Papier_idPapier'				=> $data['papiertyp'],
 										'Preis_Bildformate_idBildformate'	=> $data['bildformat']);
-				
+
 				$res = $db->autoExecute($tablename, $field_values, DB_AUTOQUERY_INSERT);
-		
+
 				if (PEAR::isError($res))
 				{
 					if ($res->getMessage() == 'DB Error: already exists')
@@ -111,15 +109,15 @@ class updatebestellung extends database implements updateinterface
 							if (PEAR::isError($resup))
 							{
 								die($resup->getMessage());
-							}	
-	
+							}
+
 						}
 					}
-					
+
 					//die($res->getMessage());
 				}
 				unset($bestellung['bilder'][$key]);
-			}			
+			}
 		}
 	}
 }

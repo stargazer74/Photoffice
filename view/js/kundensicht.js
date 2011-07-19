@@ -1,12 +1,12 @@
 $(document).ready(function() {
-	$(".singleimage").fancybox();	
-	$("a.gruppe").fancybox({
-		'transitionIn'	:	'elastic',
-		'transitionOut'	:	'elastic',
-		'speedIn'		:	600, 
-		'speedOut'		:	200, 
-		'overlayShow'	:	false
-	});
+    var settings = { 
+    		containerResizeSpeed: 350,
+    		txtImage: "Bild",   
+    		txtOf: "von",   
+    		txtPrev: "",
+    		txtNext: ""
+    };
+    $('a.singleimage').lightBox(settings);
 	
 	animatedcollapse.addDiv('bestellungbox', 'fade=0, hide=1');
 	animatedcollapse.addDiv('warenkorbbox', 'fade=0, hide=1');
@@ -34,11 +34,13 @@ $(document).ready(function() {
 
 	$('#warenkorbbox').load('warenkorb.html');
 	
+	/*
 	$(function() {
 	    $(this).bind("contextmenu", function(e) {
 	        e.preventDefault();
 	    });
 	}); 
+	*/
 });
 
 function einzelgalerie(idgalerie)
@@ -99,9 +101,7 @@ function sendFormData()
 	        success: 
 	            function(t) 
 	            { 
-					$("div#errorfeld").append(t);
-					$('#warenkorbbox').load('warenkorb.html', function(t){
-					
+					$("div#errorfeld").append(t);					
 					$.ajax( { 
 						cache: false,
 				        type: "POST", 
@@ -118,9 +118,7 @@ function sendFormData()
 				            { 
 				                $("div#errorfeld").append("Problem beim Anzeigen der Anzahlen."); 
 				            } 
-				    }); 
-						
-				});
+				    });
 	            }, 
 	        error: 
 	            function() 

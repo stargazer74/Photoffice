@@ -851,6 +851,19 @@ a.delete_galerie_button:hover{
 	background-position: 0px -14px;
 }
 
+#box_oeffentlichegalerie {
+	width: 210px;
+	height: auto;
+	margin_bottom: 10px;
+	margin-left: 10px;
+	padding: 10px;
+	background-color: #404040;
+}
+
+#oeffentlichegalerienbox_visibility {
+	visibility: hidden;
+}
+
 /*********************************************************************
 /*
 /* Contentblock

@@ -32,35 +32,32 @@ class bestellungslisteinhalt_show_behavior implements showbehavior
 			$this->tpl->touchBlock('BESTELLUNGSLISTE');	
 			foreach ($alleBestellungenArray as $key => $bestelldaten)
 			{
-				if ($bestelldaten['kundeabgeschlossen'])
+				foreach ($alleKundenArray as $kundedaten)
 				{
-					foreach ($alleKundenArray as $kundedaten)
+					if ($kundedaten['id'] == $bestelldaten['idkunde'])
 					{
-						if ($kundedaten['id'] == $bestelldaten['idkunde'])
-						{
-							$aktuellerKunde = $kundedaten;
-						}
+						$aktuellerKunde = $kundedaten;
 					}
-					if($key % 2 == 0)
-					{
-						$this->tpl->setVariable('LISTBACKGROUND', 'lightbackground');
-					}	
-					$this->tpl->setCurrentBlock('LISTE');
-					$this->tpl->setVariable('KUNDENNUMMER', $aktuellerKunde['kundennummer']);
-					$this->tpl->setVariable('NAME', $aktuellerKunde['vorname'] . ' ' . $aktuellerKunde['nachname']);
-					$this->tpl->setVariable('PREIS', $bestelldaten['bestellwert'] . ' €');
-					if ($bestelldaten['fotografabgeschlossen'] == false)
-					{
-						$this->tpl->setVariable('FUNKTION', 'mail('.$bestelldaten['id'].')');	
-						$this->tpl->setVariable('MAILBUTTONCSS', 'mail_button');	
-					}else{
-						$this->tpl->setVariable('FUNKTION', 'void()');
-						$this->tpl->setVariable('MAILBUTTONCSS', 'finished');
-					}
-					$this->tpl->setVariable('WAS', 'warenkorb');
-					$this->tpl->setVariable('BESTELLID', $bestelldaten['id']);
-					$this->tpl->parseCurrentBlock('LISTE');
 				}
+				if($key % 2 == 0)
+				{
+					$this->tpl->setVariable('LISTBACKGROUND', 'lightbackground');
+				}	
+				$this->tpl->setCurrentBlock('LISTE');
+				$this->tpl->setVariable('KUNDENNUMMER', $aktuellerKunde['kundennummer']);
+				$this->tpl->setVariable('NAME', $aktuellerKunde['vorname'] . ' ' . $aktuellerKunde['nachname']);
+				$this->tpl->setVariable('PREIS', $bestelldaten['bestellwert'] . ' €');
+				if ($bestelldaten['fotografabgeschlossen'] == false)
+				{
+					$this->tpl->setVariable('FUNKTION', 'mail('.$bestelldaten['id'].')');	
+					$this->tpl->setVariable('MAILBUTTONCSS', 'mail_button');	
+				}else{
+					$this->tpl->setVariable('FUNKTION', 'void()');
+					$this->tpl->setVariable('MAILBUTTONCSS', 'finished');
+				}
+				$this->tpl->setVariable('WAS', 'warenkorb');
+				$this->tpl->setVariable('BESTELLID', $bestelldaten['id']);
+				$this->tpl->parseCurrentBlock('LISTE');
 			}
 		}else{
 			//$this->tpl->touchBlock('KEINEBESTELLUNG');

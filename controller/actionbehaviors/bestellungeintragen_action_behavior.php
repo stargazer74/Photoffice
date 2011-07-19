@@ -1,6 +1,11 @@
 <?php
 require_once ('./controller/action.php');
-
+/**
+ * 
+ * Action Behavior for Bestellung
+ * @author Chris Wohlbrecht
+ *
+ */
 
 class bestellungeintragen_action_behavior implements action 
 {
@@ -15,6 +20,7 @@ class bestellungeintragen_action_behavior implements action
 	
 	public function _action()
 	{
+		/// @todo hier darf keine Bestellung in die Datenbank eingetragen werden (Cookies)
 		$db = new database();
 		$bilder = array();		
 		foreach ($_REQUEST['bilder'] as $key => $data)
@@ -37,13 +43,20 @@ class bestellungeintragen_action_behavior implements action
 		}
 		$datum = getdate();
 		$datum = $datum['year'] . '-' . $datum['mon'] . '-' . $datum['mday'] . ' ' . $datum['hours'] . ':' . $datum['minutes'] . ':' . $datum['seconds'];
-
-		$bestellung = new bestellung(null, $_SESSION['benutzerid'], $datum, false, false, $uebergebenerPreis, $bilder);
-		if (!$_SESSION['bestellungid'])
+		$applicationStateInstance = application::getInstance();
+		$benutzerid = $applicationStateInstance->_getNutzerID();
+		$bestellung = new bestellung(null, $benutzerid, $datum, false, $uebergebenerPreis, $bilder);
+		
+		if (!$_SESSION['aktuelleBestellung'])
 		{
-			$db->_insert($bestellung);
+			/// Bestellung neu anlegen
+			$applicationStateInstance->_setAktuelleBestellung($bestellung);
 		}else{
-			$db->_update($bestellung);
+			/// Bestelldaten hinzufügen
+			/// @todo Bestellung hinzufügen
+			$temp_aktuelleBestellung = $applicationStateInstance->_getAktuelleBestellung();
+			$neueBestellung = $temp_aktuelleBestellung->_addBestellung($bestellung);
+			$applicationStateInstance->_setAktuelleBestellung($neueBestellung);				
 		}
 	}
 }

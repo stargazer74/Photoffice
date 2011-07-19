@@ -15,46 +15,9 @@ class getbildanzahlen_action_behavior implements action
 	
 	public function _action()
 	{
-		$db = new database();
-		$alleBestellungenInstance = $db->_getBestellungen();
-		$alleBestellungenArray = $alleBestellungenInstance->_ausgeben();
-		$aktuelleBestellung = null;
-		foreach ($alleBestellungenArray as $bestellung)
-		{
-			if ($bestellung['id'] == $_SESSION['bestellungid'])
-			{
-				$aktuelleBestellung = $bestellung;
-			}
-		}
-		$distinctAktuelleBestellung = array();
-		foreach ($aktuelleBestellung['bilder'] as $bilder)
-		{
-			$isInArray = false;
-			if (count($distinctAktuelleBestellung) == 0)
-			{
-				$distinctAktuelleBestellung[$bilder['id']] = $bilder['anzahlbilder'];
-			}else{
-				foreach ($distinctAktuelleBestellung as $key => $data)
-				{
-					if ($key == $bilder['id'])
-					{
-						$isInArray = true;						 
-					}
-				}
-				if ($isInArray)
-				{
-					foreach ($distinctAktuelleBestellung as $key => $data)
-					{
-						if ($key == $bilder['id'])
-						{
-							$distinctAktuelleBestellung[$key] += $bilder['anzahlbilder'];					 
-						}
-					}
-				}else{
-					$distinctAktuelleBestellung[$bilder['id']] = $bilder['anzahlbilder'];
-				}
-			}
-		}
+		$applicationStateInstance = application::getInstance();
+		$aktuelleBestellung = $applicationStateInstance->_getAktuelleBestellung();		
+		$distinctAktuelleBestellung = $aktuelleBestellung->_getDistinctPictureArray($aktuelleBestellung);		
 		echo json_encode($distinctAktuelleBestellung);
 	}
 }

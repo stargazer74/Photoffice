@@ -6,7 +6,6 @@ abstract class abstractbestellungen implements Iterator
 	protected $id;
 	protected $idkunde;
 	protected $datum;
-	protected $kundeabgeschlossen;
 	protected $fotografabgeschlossen;
 	protected $bestellwert;
 	protected $bilder;

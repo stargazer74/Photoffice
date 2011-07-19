@@ -3,9 +3,9 @@ class insertbild extends database implements insertinterface
 {
 	public function __construct()
 	{
-		
+
 	}
-	
+
 	public function insert($object)
 	{
 		$db = DBSINGLETON::_getDBInstance();
@@ -13,7 +13,7 @@ class insertbild extends database implements insertinterface
 		$db->Query("SET NAMES UTF8");
 		$tablename = 'bild';
 		$bild = $object->_ausgeben();
-		
+
 
 		$field_values = array(	'position'				=> 0,
 								'fotograf_idfotograf'	=> $bild['fotograf'],
@@ -30,7 +30,7 @@ class insertbild extends database implements insertinterface
 								'model'					=> $bild['model'],
 								'aufnahmezeitpunkt'		=> $bild['aufnahmezeitpunkt'],
 								'aenderungszeit'		=> $bild['aenderungszeit']);
-		
+
 		$res = $db->autoExecute($tablename, $field_values, DB_AUTOQUERY_INSERT);
 
 		if (PEAR::isError($res))
@@ -38,8 +38,14 @@ class insertbild extends database implements insertinterface
 			die($res->getMessage());
 		}
 		$database = new database();
-		$alleGalerienInstance = $database->_getGalerien();
-		$alleGalerienArray = $alleGalerienInstance->_ausgeben();
+		$alleKundenGalerienInstance = $database->_getGalerien();
+		$alleKundenGalerienArray = $alleKundenGalerienInstance->_ausgeben();
+
+		$alleOeffentlichenGalerienInstance = $database->_getOeffentlicheGalerien();
+		$alleOeffentlichenGalerienArray = $alleOeffentlichenGalerienInstance->_ausgeben();
+
+		$alleGalerienArray = array_merge($alleKundenGalerienArray, $alleOeffentlichenGalerienArray);
+
 		$aktuelleGalerie = null;
 		foreach ($alleGalerienArray as $data)
 		{
@@ -48,6 +54,7 @@ class insertbild extends database implements insertinterface
 				$aktuelleGalerie = $data;
 			}
 		}
+
 		$aktuelleGalerie['bildanzahl']++;
 		$neueGalerie = new galerie($aktuelleGalerie['id'], null, null, null, $aktuelleGalerie['bildanzahl'], null);
 		$database->_update($neueGalerie);

@@ -3,21 +3,17 @@
 class application
 {
 	static private $instance = NULL;
-	private $XMLObject;
-	private $xmlfile;
-	
+	private $GalerieID;
+
 	private function __construct()
 	{
-		$this->xmlfile = './model/appstate.xml';
-		$xmlfile = file_get_contents($this->xmlfile);
-		$xml = new SimpleXMLElement($xmlfile);
-		$this->XMLObject = $xml;
+		$this->GalerieID = $_SESSION['GalerieID'];
 	}
 	private function __clone()
 	{
-		
+
 	}
-	
+
 	public static function getInstance()
 	{
 		if(self::$instance === NULL)
@@ -26,162 +22,155 @@ class application
 		}//end if
 		return self::$instance;
 	}
-	
+
+/**
+ * 
+ * get Methods
+ */
 	public function _getIDKunde()
 	{
-		$idkunde = $this->XMLObject->idkunde;
-		return strval($idkunde);
+		return $_SESSION['IDKunde'];
 	}
-	
+
 	public function _getSucheNach()
 	{
-		$suchenach = $this->XMLObject->suchenach;
-		return strval($suchenach);
+		if (!isset($_SESSION['SucheNach']))
+		{
+			$_SESSION['SucheNach'] = "nachname";
+		}
+		return $_SESSION['SucheNach'];
 	}
-	
+
 	public function _getSuchbegriff()
 	{
-		$suchbegriff = $this->XMLObject->suchbegriff;
-		return strval($suchbegriff);
+		return $_SESSION['Suchbegriff'];
 	}
-	
+
 	public function _getHowmany()
 	{
-		$howmany = $this->XMLObject->howmany;
-		return strval($howmany);
+		if (!isset($_SESSION['Howmany']))
+		{
+			$_SESSION['Howmany'] = '20';
+		}
+		return $_SESSION['Howmany'];
 	}
-	
+
 	public function _getPageID()
 	{
-		$pageid = $this->XMLObject->pageid;
-		return strval($pageid);
+		return $_SESSION['PageID'];
 	}
-	
+
 	public function _getGalerieID()
 	{
-		$galerieid = $this->XMLObject->galerieid;
-		return strval($galerieid);
+		return $this->GalerieID;
+		//return $_SESSION['GalerieID'];
 	}
-	
+
 	public function _getWasserzeichen()
 	{
-		$wasserzeichen = $this->XMLObject->wasserzeichen;
-		return strval($wasserzeichen);
+		return true;
+		//return $_SESSION['Wasserzeichen'];
 	}
-	
+
 	public function _getFotografenID()
 	{
-		$idfotograf = $this->XMLObject->idfotograf;
-		return strval($idfotograf);
+		return $_SESSION['FotografenID'];
 	}
 
 	public function _getWatermarkTransparency()
 	{
-		$watermarktrans = $this->XMLObject->watermarktrans;
-		return strval($watermarktrans);
+		return $_SESSION['WatermarkTransparency'];
 	}
-	
+
 	public function _getBestellungID()
 	{
-		$idbestellung = $this->XMLObject->idbestellung;
-		return strval($idbestellung);
+		return $_SESSION['BestellungID'];
 	}
+	
+	public function _getNutzerID()
+	{
+		return $_SESSION['benutzerid'];
+	}
+	
+/**
+ * 
+ * the current order saved in the session
+ */
+	public function _getAktuelleBestellung()
+	{
+		return $_SESSION['aktuelleBestellung'];
+	}
+
+/**
+ * 
+ * set Methods
+ * 
+ */
 	
 	public function _setIDKunde($value)
 	{
-		unset($this->XMLObject->idkunde);
-		$this->XMLObject->addChild('idkunde', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['IDKunde'] = $value;
 	}
-	
+
 	public function _setSucheNach($value)
 	{
-		unset($this->XMLObject->suchenach);
-		$this->XMLObject->addChild('suchenach', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['SucheNach'] = $value;
 	}
-	
+
 	public function _setSuchbegriff($value)
 	{
-		unset($this->XMLObject->suchbegriff);
-		$this->XMLObject->addChild('suchbegriff', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['Suchbegriff'] = $value;
 	}
-	
+
 	public function _setHowmany($value)
 	{
-		unset($this->XMLObject->howmany);
-		$this->XMLObject->addChild('howmany', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['Howmany'] = $value;
 	}
-	
+
 	public function _setPageID($value)
 	{
-		unset($this->XMLObject->pageid);
-		$this->XMLObject->addChild('pageid', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['PageID'] = $value;
 	}
-	
+
 	public function _setGalerieID($value)
 	{
-		unset($this->XMLObject->galerieid);
-		$this->XMLObject->addChild('galerieid', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['GalerieID'] = $value;
 	}
-	
+
 	public function _setWasserzeichen($value)
 	{
-		unset($this->XMLObject->wasserzeichen);
-		$this->XMLObject->addChild('wasserzeichen', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['Wasserzeichen'] = $value;
 	}
-	
+
 	public function _setFotografenID($value)
 	{
-		unset($this->XMLObject->idfotograf);
-		$this->XMLObject->addChild('idfotograf', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['FotografenID'] = $value;
 	}
 
 	public function _setWatermarkTransparency($value)
 	{
-		unset($this->XMLObject->watermarktrans);
-		$this->XMLObject->addChild('watermarktrans', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['WatermarkTransparency'] = $value;
 	}
-	
+
 	public function _setBestellungID($value)
 	{
-		unset($this->XMLObject->idbestellung);
-		$this->XMLObject->addChild('idbestellung', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-
+		$_SESSION['BestellungID'] = $value;
 	}
 	
-	private function _writeXMLFile($xmldata)
+	public function _setNutzerID($value)
 	{
-		if (!$fp = fopen($this->xmlfile, 'wb'))
-		{
-			trigger_error('Cannot open ' . $this->xmlfile);
-		}else{
-			if ( !fwrite( $fp, $xmldata, strlen($xmldata) )  )
-			{
-				trigger_error('Cannot write to ' . $this->xmlfile, E_USER_WARNING);
-			}else{
-				$success = TRUE;
-			}
-			fclose($fp);
-		}
+		$_SESSION['benutzerid'] = $value;
 	}
 	
+/**
+ * 
+ * the current order saved in the session
+ * @param Array $value
+ */
+	public function _setAktuelleBestellung($value)
+	{
+		$_SESSION['aktuelleBestellung'] = $value;
+	}
+
 }
 ?>

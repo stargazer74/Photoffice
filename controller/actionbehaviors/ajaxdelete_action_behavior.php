@@ -2,17 +2,17 @@
 require_once ('./controller/action.php');
 
 
-class ajaxdelete_action_behavior implements action 
+class ajaxdelete_action_behavior implements action
 {
-	
+
 	private $controller;
-	
+
 	public function __construct($controller = 'defaultcontroller')
 	{
 		$this->controller = $controller;
-		
+
 	}
-	
+
 	public function _action()
 	{
 		$db= new database();
@@ -22,38 +22,38 @@ class ajaxdelete_action_behavior implements action
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'fotodaten';
 				break;
-				
+
 			case preis:
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'fotodaten';
 				break;
-				
+
 			case bildformat:
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'fotodaten';
 				break;
-				
+
 			case kunde:
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'kundenliste';
 				break;
-				
+
 			case bild:
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'bilduebersicht';
 				break;
-				
+
 			case galerie:
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'allegalerien';
 				break;
-				
+
 			case fotograf:
 				$db = new database();
 				$alleFotografenInstance = $db->_getFotografen();
 				$alleFotografenArray = $alleFotografenInstance->_ausgeben();
 				$aktuellerFotograf = null;
-				
+
 				$anzahl = null;
 				foreach ($alleFotografenArray as $fotograf)
 				{
@@ -70,18 +70,23 @@ class ajaxdelete_action_behavior implements action
 					$this->controller = 'fotografenliste';
 				}else{
 					$this->controller = 'fotografenliste';
-				}				
+				}
 				break;
-				
-			case warenkorb:			
+
+			case warenkorb:
 				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
 				$this->controller = 'bestellungslisteinhalt';
 				break;
-				
+
+			case porto:
+				$db->_delete($_REQUEST['was'], $_REQUEST['id']);
+				$this->controller = 'fotodaten';
+				break;
+
 			default:
 				break;
 		}
-		
+
 		if(class_exists($this->controller.'_view'))
 		{
 			$class = $this->controller.'_view';
@@ -101,7 +106,7 @@ class ajaxdelete_action_behavior implements action
 					$viewobject->_Show();
 				}//end if Sessionabfrage
 			}//end if Protectionstate abfrage
-				
+
 		}else{
 			$object = controller::_controllerFactory('defaultcontroller');
 			$object->_tuaction();

@@ -17,7 +17,6 @@ class insertbestellung extends database implements insertinterface
 
 		$field_values = array(	'Kunden_idKunden'		=> $bestellung['idkunde'],
 								'datum'					=> $bestellung['datum'],
-								'kundeabgeschlossen'	=> $bestellung['kundeabgeschlossen'],
 								'fotografabgeschlossen'	=> $bestellung['fotografabgeschlossen'],
 								'bestellwert'			=> $bestellung['bestellwert']);
 		

@@ -1,11 +1,18 @@
 <?php
-$my_pear_path = $_SERVER['DOCUMENT_ROOT']."/photoffice/PEAR";
+/**
+ * 
+ * @license GPL
+ * @author Chris Wohlbrecht
+ * 
+ */
+
+$my_pear_path = $_SERVER['DOCUMENT_ROOT']."/PEAR";
 ini_set("include_path", $my_pear_path . PATH_SEPARATOR . ini_get("include_path"));
 /***********************************************************************************
  * Requirements
  ***********************************************************************************/
 ////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // PEAR Includes
 //
 ////////////////////////////////////////////////////////////////////////////////////
@@ -15,13 +22,14 @@ require_once("DB.php");
 require_once("HTML/QuickForm.php");
 require_once("HTML/QuickForm/Renderer/ITStatic.php");
 require_once('Pager.php');
-require_once('Mail.php'); 
+require_once('Mail.php');
 ////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // controller Includes
 //
 ////////////////////////////////////////////////////////////////////////////////////
 require_once('./controller/actionbehaviors/standard_action_behavior.php');
+require_once('./controller/actionbehaviors/onlineshopstandard_action_behavior.php');
 require_once('./controller/actionbehaviors/ajaxdelete_action_behavior.php');
 require_once('./controller/actionbehaviors/kundedelete_action_behavior.php');
 require_once('./controller/actionbehaviors/applicationstate_action_behavior.php');
@@ -32,6 +40,7 @@ require_once('./controller/actionbehaviors/getpapierformat_action_behavior.php')
 require_once('./controller/actionbehaviors/getbildanzahlen_action_behavior.php');
 require_once('./controller/actionbehaviors/bestellungeintragen_action_behavior.php');
 require_once('./controller/actionbehaviors/warenkorbeintragen_action_behavior.php');
+require_once('./controller/actionbehaviors/ajaxupdate_action_behavior.php');
 require_once('./controller/kundendefaultcontroller.php');
 require_once('./controller/generierebestellungspdf.php');
 require_once('./controller/bestellungeintragen.php');
@@ -76,9 +85,12 @@ require_once('./controller/bestellungsliste.php');
 require_once('./controller/bestellungslisteinhalt.php');
 require_once('./controller/bestellungsdaten.php');
 require_once('./controller/bestellungabschliessen.php');
+require_once('./controller/oeffentlichegalerien.php');
+require_once('./controller/neueoeffentlichegalerie.php');
+require_once('./controller/ajaxupdate.php');
 
 ////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // model Includes
 //
 ////////////////////////////////////////////////////////////////////////////////////
@@ -136,9 +148,17 @@ require_once("./model/classes/images.php");
 require_once("./model/classes/string.php");
 require_once("./model/classes/datum.php");
 require_once("./model/classes/pdf_bestellung.php");
+require_once("./model/classes/abstractporto.php");
+require_once("./model/classes/portosInterface.php");
+require_once("./model/classes/portos.php");
+require_once("./model/classes/porto.php");
+require_once("./model/classes/abstractzahlungsarten.php");
+require_once("./model/classes/zahlungsartenInterface.php");
+require_once("./model/classes/zahlungsarten.php");
+require_once("./model/classes/zahlungsart.php");
 
 ////////////////////////////////////////////////////////////////////////////////////
-// 
+//
 // view Includes
 //
 ////////////////////////////////////////////////////////////////////////////////////
@@ -193,6 +213,10 @@ require_once ('./view/showbehaviors/bestellungslisteinhalt_show_behavior.php');
 require_once ('./view/showbehaviors/bestellungsdaten_show_behavior.php');
 require_once ('./view/showbehaviors/bestellungabschliessen_show_behavior.php');
 require_once ('./view/showbehaviors/generierebestellungspdf_show_behavior.php');
+require_once ('./view/showbehaviors/oeffentlichegalerien_show_behavior.php');
+require_once ('./view/showbehaviors/neueoeffentlichegalerie_show_behavior.php');
+require_once ('./view/showbehaviors/oeffentlichegalerienbox_show_behavior.php');
+require_once ('./view/showbehaviors/onlineshop_show_behavior.php');
 require_once('./view/login.php');
 require_once('./view/logout.php');
 require_once('./view/firmendaten.php');
@@ -226,6 +250,9 @@ require_once('./view/bestellungslisteinhalt.php');
 require_once('./view/bestellungsdaten.php');
 require_once('./view/bestellungabschliessen.php');
 require_once('./view/generierebestellungspdf.php');
+require_once('./view/oeffentlichegalerien.php');
+require_once('./view/neueoeffentlichegalerie.php');
+require_once('./view/onlineshop.php');
 
 session_start();
 

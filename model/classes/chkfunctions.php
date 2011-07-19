@@ -3,13 +3,13 @@ class chkfunctions
 {
 	public function __construct()
 	{
-		
+
 	}
-	
+
 	public static function _chkIfPreisExists($fields, $vergleichsdaten)
 	{
 		$db = new database();
-		$allePreiseInstance = $db->_getPreise();		
+		$allePreiseInstance = $db->_getPreise();
 		$allePreiseArray = $allePreiseInstance->_ausgeben();
 		$treffer = false;
 		foreach ($allePreiseArray as $data)
@@ -27,10 +27,10 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfPapierFormatExists($fields, $formulardaten)
 	{
-		$db = new database();		
+		$db = new database();
 		$allePapierFormateInstance = $db->_getPapierFormate();
 		$allePapierFormateArray = $allePapierFormateInstance->_ausgeben();
 
@@ -50,7 +50,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfBildFormatExists($fields, $formulardaten)
 	{
 		$db = new database();
@@ -72,7 +72,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfCustomerNumberExists($fields, $kundennummer)
 	{
 		$db = new database();
@@ -94,7 +94,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfCustomerNumberExistsForUpdate($fields, $formdaten)
 	{
 		$db = new database();
@@ -116,7 +116,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfPasswortIsEmpty($fields, $formdaten)
 	{
 		if ($formdaten[0] != '' && $formdaten[1] == '')
@@ -126,7 +126,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfUsernameIsEmpty($fields, $formdaten)
 	{
 		if ($formdaten[0] == '' && $formdaten[1] != '')
@@ -136,7 +136,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfOnlineStatusCanChange($fields, $verfallsdatum)
 	{
 		if (datum::_checkIfDateIsEqualOrSmaller($verfallsdatum))
@@ -146,7 +146,7 @@ class chkfunctions
 			return true;
 		}
 	}
-	
+
 	public static function _chkIfPreisIsAvailable()
 	{
 		$db = new database();
@@ -158,6 +158,11 @@ class chkfunctions
 		}else{
 			return true;
 		}
+	}
+
+	public static function _chkIfPortoExists($fields, $formulardaten)
+	{
+		return true;
 	}
 }
 ?>

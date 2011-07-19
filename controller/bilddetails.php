@@ -1,12 +1,14 @@
 <?php
-
 require_once ('./controller/controller.php');
 
-
 /**
+ * 
+ * @license GPL http://www.gnu.org/licenses/gpl-3.0.html
  * @author Chris Wohlbrecht
- *
+ * 
  */
+
+
 class bilddetails extends controller
 {
 	public function __construct()

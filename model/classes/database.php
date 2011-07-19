@@ -5,13 +5,13 @@ class database
 	private $id;
 	protected $insertVerhalten;
 	protected $updateVerhalten;
-	
+
 	public function __construct($sqlstring = null, $id = null)
 	{
 		$this->sqlstring = $sqlstring;
 		$this->id = $id;
 	}
-	
+
 	public function _select()
 	{
 		$db = DBSINGLETON::_getDBInstance();
@@ -24,12 +24,12 @@ class database
 		}//end if
 		return $result;
 	}
-	
+
 	public function _setSqlString($sqlstring)
 	{
 		$this->sqlstring = $sqlstring;
 	}
-	
+
 	public function _getFotografen()
 	{
 		$this->sqlstring = 'SELECT * FROM fotograf';
@@ -43,7 +43,7 @@ class database
 		}
 		return $alleFotografen;
 	}
-	
+
 	public function _getPreise()
 	{
 		$this->sqlstring = 'SELECT * FROM preis p, papier pa, bildformate b WHERE p.Papier_idPapier = pa.idPapier AND p.Bildformate_idBildformate = b.idBildformate';
@@ -56,7 +56,33 @@ class database
 		}
 		return $allePreise;
 	}
-	
+
+	public function _getZahlungsarten()
+	{
+		$this->sqlstring = 'SELECT * FROM zahlungsart';
+		$result = $this->_select();
+		$alleZahlungsarten = new zahlungsarten();
+		foreach($result as $daten)
+		{
+			$zahlungsart = new zahlungsart($daten['idZahlungsart'], $daten['zahlungsart'], $daten['aktiv']);
+			$alleZahlungsarten->_hinzufuegen($zahlungsart);
+		}
+		return $alleZahlungsarten;
+	}
+
+	public function _getPortos()
+	{
+		$this->sqlstring = 'SELECT * FROM versandkosten';
+		$result = $this->_select();
+		$portos = new portos();
+		foreach($result as $daten)
+		{
+			$porto = new porto($daten['idVersandkosten'], $daten['versandart'], $daten['versandkosten']);
+			$portos->_hinzufuegen($porto);
+		}
+		return $portos;
+	}
+
 	public function _getBestellungen()
 	{
 		$this->sqlstring = 'SELECT * FROM bestellung';
@@ -69,17 +95,17 @@ class database
 			$bilder = array();
 			foreach ($result as $data)
 			{
-				$bilder[] = array('id' => $data['Bild_idBild'], 'anzahlbilder' => $data['Anzahl'], 'papiertyp' => $data['Preis_Papier_idPapier'], 'bildformat' => $data['Preis_Bildformate_idBildformate']); 
+				$bilder[] = array('id' => $data['Bild_idBild'], 'anzahlbilder' => $data['Anzahl'], 'papiertyp' => $data['Preis_Papier_idPapier'], 'bildformat' => $data['Preis_Bildformate_idBildformate']);
 			}
-			$bestellung = new bestellung($daten['idBestellung'], $daten['Kunden_idKunden'], $daten['datum'], $daten['kundeabgeschlossen'], $daten['fotografabgeschlossen'], $daten['bestellwert'], $bilder);
+			$bestellung = new bestellung($daten['idBestellung'], $daten['Kunden_idKunden'], $daten['datum'], $daten['fotografabgeschlossen'], $daten['bestellwert'], $bilder);
 			$alleBestellungen->_hinzufuegen($bestellung);
 		}
 		return $alleBestellungen;
 	}
-	
+
 	public function _getGalerien()
 	{
-		$this->sqlstring = 'SELECT * FROM gallerien';
+		$this->sqlstring = 'SELECT * FROM gallerien g, kunden_has_gallerien khg WHERE g.idgallerien = khg.gallerien_idgallerien';
 		$result = $this->_select();
 		$alleGalerien = new galerien();
 		foreach($result as $daten)
@@ -89,7 +115,20 @@ class database
 		}
 		return $alleGalerien;
 	}
-	
+
+	public function _getOeffentlicheGalerien()
+	{
+		$this->sqlstring = 'SELECT * FROM gallerien g WHERE NOT EXISTS (SELECT * FROM kunden_has_gallerien khg WHERE g.idgallerien = khg.gallerien_idgallerien)';
+		$result = $this->_select();
+		$alleGalerien = new galerien();
+		foreach($result as $daten)
+		{
+			$galerie = new galerie($daten['idgallerien'], $daten['galleriename'], $daten['online'], $daten['verfallsdatum'], $daten['bildanzahl'], null, $daten['nurpreise']);
+			$alleGalerien->_hinzufuegen($galerie);
+		}
+		return $alleGalerien;
+	}
+
 	public function _getBildFormate()
 	{
 		$this->sqlstring = 'SELECT * FROM bildformate';
@@ -102,7 +141,7 @@ class database
 		}
 		return $alleBildFormate;
 	}
-	
+
 	public function _getPapierFormate()
 	{
 		$this->sqlstring = 'SELECT * FROM papier';
@@ -115,7 +154,7 @@ class database
 		}
 		return $allePapierFormate;
 	}
-	
+
 	public function _getKunden()
 	{
 		$this->sqlstring = 'SELECT * FROM kunden';
@@ -128,7 +167,7 @@ class database
 		}
 		return $alleKunden;
 	}
-	
+
 	public function _getBilder()
 	{
 		$this->sqlstring = 'SELECT * FROM bild';
@@ -141,7 +180,7 @@ class database
 		}
 		return $alleBilder;
 	}
-	
+
 	public function _getFirmenDaten()
 	{
 		$this->sqlstring = 'SELECT * FROM firma';
@@ -149,15 +188,15 @@ class database
 		//print_r($result);
 		return $result;
 	}
-	
+
 	public function _getNavigation()
 	{
 		$this->sqlstring = 'SELECT * FROM navigation';
 		$result = $this->_select();
 		//print_r($result);
-		return $result;	
+		return $result;
 	}
-	
+
 	public static function _updateFirmenDaten($fields)
 	{
 		$db = DBSINGLETON::_getDBInstance();
@@ -210,7 +249,7 @@ class database
 		$this->insertVerhalten->insert($object);
 		return true;
 	}
-	
+
 	public function _update($object)
 	{
 		$type = get_class($object);
@@ -230,7 +269,7 @@ class database
 		$this->updateVerhalten->update($object);
 		return true;
 	}
-	
+
 	public function _delete($object, $id)
 	{
 		$type = 'delete' .$object;

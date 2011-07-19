@@ -18,6 +18,7 @@ class galerieaendern_show_behavior implements showbehavior
 		$db = new database();
 
 		//aktuelle Galerie
+		$isGaleryPublic = false;
 		$alleGalerienInstance = $db->_getGalerien();
 		$alleGalerienArray = $alleGalerienInstance->_ausgeben();
 
@@ -33,6 +34,7 @@ class galerieaendern_show_behavior implements showbehavior
 
 		if (!$aktuelleGalerie)
 		{
+			$isGaleryPublic = true;
 			$alleGalerienInstance = $db->_getOeffentlicheGalerien();
 			$alleGalerienArray = $alleGalerienInstance->_ausgeben();
 		}
@@ -75,7 +77,10 @@ class galerieaendern_show_behavior implements showbehavior
 		$form->addGroup($onlinestatus, 'onlinestatus', null, '<br />', false);
 		$form->addElement($galeriename);
 		$form->addElement($verfallsdatum);
-		$form->addElement($kundenmail);
+		if (!$isGaleryPublic)
+		{
+			$form->addElement($kundenmail);
+		}
 		$form->addElement($submit);
 
 		if (!$aktuellerKunde['passwort'])
