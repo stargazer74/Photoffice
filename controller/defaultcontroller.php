@@ -3,11 +3,10 @@ require_once ('./controller/controller.php');
 
 /**
  * 
- * @license GPL http://www.gnu.org/licenses/gpl-3.0.html
+ * @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @author Chris Wohlbrecht
  * 
  */
-
 
 class defaultcontroller extends controller
 {
@@ -18,5 +17,4 @@ class defaultcontroller extends controller
 		$this->actionBehaviorObject = new standard_action_behavior($this->controller);
 	}
 }
-
 ?>

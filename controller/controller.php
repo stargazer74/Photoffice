@@ -1,10 +1,10 @@
 <?php
 
 /**
- * 
- * @license GPL http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @author Chris Wohlbrecht
- * 
+ *
  */
 
 abstract class controller

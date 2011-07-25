@@ -2,7 +2,6 @@
 
 require_once ('./controller/controller.php');
 
-
 /**
  * @author Chris Wohlbrecht
  *
@@ -16,5 +15,4 @@ class oeffentlichegalerien extends controller
 		$this->actionBehaviorObject = new standard_action_behavior($this->controller);
 	}
 }
-
 ?>

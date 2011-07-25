@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * @license LGPL
+ * @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
  * @author Chris Wohlbrecht
  * 
  */

@@ -32,26 +32,5 @@ class logincheck
 		}//end else
 
 	}
-	
-	public function _checkVersionStatus()
-	{
-		$registryInstance = registry::getInstance();
-		$serialNumber = $registryInstance->_getSerialNumber();
-		$date = array('mday' => 35, 'mon' => 10, 'year' => 2010);
-		$ip = $_SERVER['SERVER_ADDR'];
-
-		$client = new IXR_Client($registryInstance->_getXmlRpcString());
-		if (!$client->query('fotoffice.validatecopy', $serialNumber, $date, $ip)) 
-		{
-			//return false;
-			die('An error occurred - '.$client->getErrorCode().":".$client->getErrorMessage());
-		}
-		if($client->getResponse() == TRUE)
-		{
-			return TRUE;
-		}else{
-			return FALSE;
-		}
-	}
 }
 ?>

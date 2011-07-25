@@ -46,11 +46,6 @@ class login_show_behavior implements showbehavior
 		//print_r($parameter);
 		$form->addRule('passwort', 'Falsches Login', '_chk_login', $felder);
 
-		$form->registerRule('_checkVersionStatus', 'callback', '_checkVersionStatus', 'logincheck');
-		$form->addRule('passwort', 'Ihre Version ist abgelaufen.', '_checkVersionStatus');
-
-
-
 		if(false == $form->validate())
 		{
 			$renderer = new HTML_QuickForm_Renderer_ITStatic($this->tpl);

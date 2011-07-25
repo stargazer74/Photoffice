@@ -1,6 +1,12 @@
 <?php
 require_once ('./controller/action.php');
 
+/**
+ *
+ * @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+ * @author Chris Wohlbrecht
+ *
+ */
 
 class standard_action_behavior implements action 
 {
