@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * @license GPL
+ * @license LGPL
  * @author Chris Wohlbrecht
  * 
  */
