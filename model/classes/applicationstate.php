@@ -1,5 +1,15 @@
 <?php
 
+/**
+*
+* Sets the appstate and read/write the values in the  appstate.xml
+* file.
+* Singletons
+* @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+* @author Chris Wohlbrecht
+*
+*/
+
 class application
 {
 	static private $instance = NULL;
@@ -23,10 +33,11 @@ class application
 		return self::$instance;
 	}
 
-/**
- * 
- * get Methods
- */
+/////////////////////////////////////////////////////////////////////
+//
+//get methods
+//
+/////////////////////////////////////////////////////////////////////
 	public function _getIDKunde()
 	{
 		return $_SESSION['IDKunde'];
@@ -95,17 +106,18 @@ class application
 /**
  * 
  * the current order saved in the session
+ * 
  */
 	public function _getAktuelleBestellung()
 	{
 		return $_SESSION['aktuelleBestellung'];
 	}
 
-/**
- * 
- * set Methods
- * 
- */
+///////////////////////////////////////////////////////////////////////////
+//
+// set methods
+// 
+//////////////////////////////////////////////////////////////////////////
 	
 	public function _setIDKunde($value)
 	{
@@ -171,6 +183,5 @@ class application
 	{
 		$_SESSION['aktuelleBestellung'] = $value;
 	}
-
 }
 ?>

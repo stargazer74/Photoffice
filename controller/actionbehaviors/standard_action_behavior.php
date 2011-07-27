@@ -4,7 +4,7 @@ require_once ('./controller/action.php');
 /**
  *
  * @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
- * @author Chris Wohlbrecht
+ * @author <a href="mailto:c.wohlbrecht@photoffice.de">Chris Wohlbrecht</a>
  *
  */
 
@@ -33,16 +33,16 @@ class standard_action_behavior implements action
 			$viewobject = new $class;
 			if($viewobject->_getProtectionState() == false)
 			{
-				//View anzeigen
+				//show view
 				$viewobject->_Show();
 			}else{
 				if($_SESSION['logged'] != md5('goforit'))
 				{
-					//Loginview anzeigen
+					//show loginview
 					$viewobject = new login_view();
 					$viewobject->_Show();
 				}else{
-					//View anzeigen
+					//show view
 					$viewobject->_Show();
 				}//end if Sessionabfrage
 			}//end if Protectionstate abfrage

@@ -1,6 +1,12 @@
 <?php
 require_once ('./controller/action.php');
 
+/**
+*
+* @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+* @author <a href="mailto:c.wohlbrecht@photoffice.de">Chris Wohlbrecht</a>
+*
+*/
 
 class kundestandard_action_behavior implements action 
 {
@@ -25,16 +31,16 @@ class kundestandard_action_behavior implements action
 			$viewobject = new $class;
 			if($viewobject->_getProtectionState() == false)
 			{
-				//View anzeigen
+				//show view
 				$viewobject->_Show();
 			}else{
 				if($_SESSION['kundelogged'] != md5('customergoforit'))
 				{
-					//Loginview anzeigen
+					//show loginview
 					$viewobject = new kundenlogin_view();
 					$viewobject->_Show();
 				}else{
-					//View anzeigen
+					//show view
 					$viewobject->_Show();
 				}//end if Sessionabfrage
 			}//end if Protectionstate abfrage

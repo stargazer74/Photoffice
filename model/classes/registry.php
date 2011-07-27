@@ -1,5 +1,11 @@
 <?php
 
+/**
+*
+* @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+* @author Chris Wohlbrecht
+*
+*/
 
 class registry {
 
@@ -10,7 +16,6 @@ class registry {
 	private $DatabaseName;
 	private $DatabaseUser;
 	private $DatabasePassphrase;
-	private $SerialNumber;
 	private $VersionNumber;
 	private $xmlrpcString;
 
@@ -57,7 +62,7 @@ class registry {
 
 ///////////////////////////////////////////////////////////////
 //
-//getter Methoden
+//getter methods
 //
 //////////////////////////////////////////////////////////////
 
@@ -81,11 +86,6 @@ class registry {
 		return strval($this->DatabaseName);
 	}
 
-	public function _getSerialNumber()
-	{
-		return strval($this->SerialNumber);
-	}
-
 	public function _getVersionNumber()
 	{
 		return strval($this->VersionNumber);
@@ -98,7 +98,7 @@ class registry {
 
 ///////////////////////////////////////////////////////////////
 //
-//set Methoden
+//set methods
 //
 //////////////////////////////////////////////////////////////
 
@@ -168,13 +168,6 @@ class registry {
 		$this->_writeXMLFile($this->XMLObject->asXML());
 	}
 
-	public function _setSerialNumber($value)
-	{
-		unset($this->XMLObject->SerialNumber);
-		$this->XMLObject->addChild('SerialNumber', $value);
-		$this->_writeXMLFile($this->XMLObject->asXML());
-	}
-
 	public function _registerShop()
 	{
 		$_SESSION['registered'] = true;
@@ -183,7 +176,7 @@ class registry {
 
 ///////////////////////////////////////////////////////////////
 //
-//private Methoden
+//privat methods
 //
 //////////////////////////////////////////////////////////////
 
