@@ -41,10 +41,10 @@ abstract class view
 	
 	/**
 	 * 
-	 * Holds an array wich roles can view the view
-	 * @var Array
+	 * Holds a role
+	 * @var String role
 	 */
-	protected $allowed_roles;
+	protected $allowed_role;
 	
 	static protected $instance_view;
 	
@@ -77,6 +77,11 @@ abstract class view
 	public function _getProtectionState()
 	{
 		return $this->protected;
+	}
+	
+	public function _getAllowedRole()
+	{
+		return $this->allowed_role;
 	}
 }
 ?>

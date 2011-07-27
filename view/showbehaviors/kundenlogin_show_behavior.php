@@ -2,6 +2,12 @@
 
 require_once ('./view/showbehavior.php');
 
+/**
+*
+* @license LGPL http://www.gnu.org/licenses/lgpl-3.0.html
+* @author <a href="mailto:c.wohlbrecht@photoffice.de">Chris Wohlbrecht</a>
+*
+*/
 
 class kundenlogin_show_behavior implements showbehavior
 {
@@ -46,7 +52,8 @@ class kundenlogin_show_behavior implements showbehavior
 			$renderer->setErrorTemplate('');
 			$form->accept($renderer);
 		}else{
-			$_SESSION['kundelogged'] = md5("customergoforit");
+			$applicationstate = application::getInstance();
+			$applicationstate->_addRole("customer");
 			header("Location:./kundenindex.html");
 		}
 

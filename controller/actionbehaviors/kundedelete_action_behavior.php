@@ -37,6 +37,7 @@ class kundedelete_action_behavior implements action
 				//View anzeigen
 				$viewobject->_Show();
 			}else{
+			//@TODO depricated use role instead
 				if($_SESSION['kundelogged'] != md5('customergoforit'))
 				{
 					//Loginview anzeigen

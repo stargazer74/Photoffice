@@ -144,7 +144,7 @@ function resetAnzahl()
 
 function deleteWarenkorb()
 {
-	var answer = confirm("Möchten Sie die Bestellung wirklich löschen?")
+	var answer = confirm("Möchten Sie die Bestellung wirklich löschen?");
 	if (answer){
 		$.ajax( { 
 			cache: false,

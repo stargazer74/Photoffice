@@ -1,6 +1,6 @@
 function delete_item(was, id) 
 {
-	var answer = confirm("Möchten Sie das Obkjekt wirklich löschen?")
+	var answer = confirm("Möchten Sie das Obkjekt wirklich löschen?");
 	if (answer){
 		var ajxFile = "ajaxdelete.html"; 	   
 	   	$.ajax(

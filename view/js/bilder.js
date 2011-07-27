@@ -68,7 +68,7 @@ function showPictureDetails(pictureid)
 
 function delete_picture(was, id)
 {
-	var answer = confirm("Möchten Sie das Bild wirklich löschen?")
+	var answer = confirm("Möchten Sie das Bild wirklich löschen?");
 	if (answer){
 		var ajxFile = "ajaxdelete.html"; 	   
 	   	$.ajax(
@@ -87,7 +87,7 @@ function delete_picture(was, id)
 
 function delete_galerie(was, id)
 {
-	var answer = confirm("Möchten Sie die Galerie wirklich löschen?")
+	var answer = confirm("Möchten Sie die Galerie wirklich löschen?");
 	if (answer){
 		var ajxFile = "ajaxdelete.html"; 	   
 	   	$.ajax(
@@ -106,7 +106,7 @@ function delete_galerie(was, id)
 
 function deleteOeffentlicheGalerie(was, id)
 {
-	var answer = confirm("Möchten Sie die Galerie wirklich löschen?")
+	var answer = confirm("Möchten Sie die Galerie wirklich löschen?");
 	if (answer){
 		var ajxFile = "ajaxdelete.html"; 	   
 	   	$.ajax(

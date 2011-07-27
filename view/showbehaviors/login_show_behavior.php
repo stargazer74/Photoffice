@@ -52,7 +52,8 @@ class login_show_behavior implements showbehavior
 			$renderer->setErrorTemplate('');
 			$form->accept($renderer);
 		}else{
-			$_SESSION['logged'] = md5("goforit");
+			$applicationstate = application::getInstance();
+			$applicationstate->_addRole("photographer");
 			header("Location:./index.html");
 		}
 

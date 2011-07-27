@@ -96,6 +96,7 @@ class ajaxdelete_action_behavior implements action
 				//View anzeigen
 				$viewobject->_Show();
 			}else{
+				//@TODO depricated check for role instead
 				if($_SESSION['logged'] != md5('goforit'))
 				{
 					//Loginview anzeigen

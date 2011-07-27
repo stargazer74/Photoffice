@@ -9,7 +9,7 @@ class kundenlogin extends controller
 	{
 		$this->controller = get_class($this);
 		$this->dispatcher = Event_Dispatcher::getInstance();
-		$this->actionBehaviorObject = new kundestandard_action_behavior($this->controller);
+		$this->actionBehaviorObject = new standard_action_behavior($this->controller);
 	}
 }
 

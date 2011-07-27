@@ -19,25 +19,25 @@ preloadimages: [],
 show:function(divids){ //public method
 	if (typeof divids=="object"){
 		for (var i=0; i<divids.length; i++)
-			this.showhide(divids[i], "show")
+			this.showhide(divids[i], "show");
 	}
 	else
-		this.showhide(divids, "show")
+		this.showhide(divids, "show");
 },
 
 hide:function(divids){ //public method
 	if (typeof divids=="object"){
 		for (var i=0; i<divids.length; i++)
-			this.showhide(divids[i], "hide")
+			this.showhide(divids[i], "hide");
 	}
 	else
-		this.showhide(divids, "hide")
+		this.showhide(divids, "hide");
 },
 
 toggle:function(divid){ //public method
 	if (typeof divid=="object")
-		divid=divid[0]
-	this.showhide(divid, "toggle")
+		divid=divid[0];
+	this.showhide(divid, "toggle");
 },
 
 addDiv:function(divid, attrstring){ //public function

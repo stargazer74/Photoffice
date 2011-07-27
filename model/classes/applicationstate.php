@@ -112,6 +112,15 @@ class application
 	{
 		return $_SESSION['aktuelleBestellung'];
 	}
+	
+	public function _getRoles()
+	{
+		if (!isset($_SESSION['roles'])) 
+		{
+			$_SESSION['roles'] =  array();
+		}
+		return $_SESSION['roles'];	
+	}
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -182,6 +191,17 @@ class application
 	public function _setAktuelleBestellung($value)
 	{
 		$_SESSION['aktuelleBestellung'] = $value;
+	}
+	
+	public function _addRole($role)
+	{
+		if (!isset($_SESSION['roles'])) 
+		{
+			$_SESSION['roles'] = array(md5($role));
+		}else
+		{
+			array_push($_SESSION['roles'], md5($role));
+		}
 	}
 }
 ?>

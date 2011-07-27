@@ -36,7 +36,18 @@ class standard_action_behavior implements action
 				//show view
 				$viewobject->_Show();
 			}else{
-				if($_SESSION['logged'] != md5('goforit'))
+				//@TODO depricated check for role instead
+				$allowedRole = $viewobject->_getAllowedRole();
+				$sessionRoles = application::getInstance()->_getRoles();
+				$match = false;
+				foreach ($sessionRoles as $role)
+				{
+					if (in_array(md5($allowedRole), $sessionRoles))
+					{
+						$match = true;
+					}
+				}				
+				if(!$match)
 				{
 					//show loginview
 					$viewobject = new login_view();
@@ -48,6 +59,7 @@ class standard_action_behavior implements action
 			}//end if Protectionstate abfrage
 				
 		}else{
+			//@TODO don't switch to defaultcontroller, show actuel view instead
 			$object = controller::_controllerFactory('defaultcontroller');
 			$object->_tuaction();
 		}
