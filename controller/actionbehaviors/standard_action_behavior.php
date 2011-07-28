@@ -29,14 +29,15 @@ class standard_action_behavior implements action
 
 		if(class_exists($this->controller.'_view'))
 		{
+			application::getInstance()->_setActualView($this->controller);
 			$class = $this->controller.'_view';
 			$viewobject = new $class;
 			if($viewobject->_getProtectionState() == false)
 			{
 				//show view
 				$viewobject->_Show();
-			}else{
-				//@TODO depricated check for role instead
+			}else
+			{
 				$allowedRole = $viewobject->_getAllowedRole();
 				$sessionRoles = application::getInstance()->_getRoles();
 				$match = false;
@@ -49,9 +50,25 @@ class standard_action_behavior implements action
 				}				
 				if(!$match)
 				{
-					//show loginview
-					$viewobject = new login_view();
-					$viewobject->_Show();
+					switch ($viewobject->_getAllowedRole()) 
+					{
+						case "photographer":
+							//show loginview for photographer
+							$viewobject = new login_view();
+							$viewobject->_Show();
+							break;
+							
+						case "customer":
+							//show loginview for customer
+							$viewobject = new kundenlogin_view();
+							$viewobject->_Show();
+							break;
+						
+						default:
+							break;
+					}					
+					//@TODO check wich login page should show
+
 				}else{
 					//show view
 					$viewobject->_Show();
@@ -60,7 +77,7 @@ class standard_action_behavior implements action
 				
 		}else{
 			//@TODO don't switch to defaultcontroller, show actuel view instead
-			$object = controller::_controllerFactory('defaultcontroller');
+			$object = controller::_controllerFactory(application::getInstance()->_getActualView());
 			$object->_tuaction();
 		}
 

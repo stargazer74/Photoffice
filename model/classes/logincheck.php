@@ -24,7 +24,9 @@ class logincheck
 			}
 		}//end foreach
 		if($tmp == 1)
-		{			
+		{	
+			$applicationstate = application::getInstance();
+			$applicationstate->_addRole("photographer");		
 			return TRUE;
 			
 		}else{//end if

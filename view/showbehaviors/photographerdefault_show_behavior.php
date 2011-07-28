@@ -3,7 +3,7 @@
 require_once ('./view/showbehavior.php');
 
 
-class default_show_behavior implements showbehavior
+class photographerdefault_show_behavior implements showbehavior
 {
 	public function __construct()
 	{

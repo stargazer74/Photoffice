@@ -51,9 +51,8 @@ class kundenlogin_show_behavior implements showbehavior
 			$renderer = new HTML_QuickForm_Renderer_ITStatic($this->tpl);
 			$renderer->setErrorTemplate('');
 			$form->accept($renderer);
-		}else{
-			$applicationstate = application::getInstance();
-			$applicationstate->_addRole("customer");
+		}else
+		{
 			header("Location:./kundenindex.html");
 		}
 

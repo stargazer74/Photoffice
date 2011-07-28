@@ -3,17 +3,24 @@ tag 1.0.2.1. It was a commercial Version, wich has already a copy verifying meth
 class "logincheck".
 
 
-
-WHAT PHOTOFFICE DO
-
-
-INSTALLATION
+WHAT PHOTOFFICE DO:
 
 
-DEPENDENCIES
+INSTALLATION:
 
 
-LICENSE
+DEPENDENCIES:
+
+Pear dependencies
+	- HTML_QuickForm
+	- HTML_Template_ITX
+	- DB
+	- Pager
+	- Mail	
+	- Event_Dispatcher
+
+
+LICENSE:
 
 Photoffice is published under the LGPL http://www.gnu.org/licenses/lgpl-3.0.html. See below.
 

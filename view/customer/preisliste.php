@@ -8,14 +8,15 @@ require_once('./view/view.php');
 *
 */
 
-class default_view extends view
+class preisliste_view extends view
 {
 	public function __construct()
 	{
 		self::$instance_view = $this;
-		$this->show_behavior = new default_show_behavior();
+		$this->show_behavior = new preisliste_show_behavior();
 		$this->protected = true;
-		$this->allowed_role = "photographer";
+		$this->allowed_role = "customer";
 	}
+
 }
 ?>

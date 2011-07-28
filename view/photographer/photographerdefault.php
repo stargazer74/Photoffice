@@ -8,14 +8,14 @@ require_once('./view/view.php');
 *
 */
 
-class kundendefault_view extends view
+class photographerdefault_view extends view
 {
 	public function __construct()
 	{
 		self::$instance_view = $this;
-		$this->show_behavior = new kundendefault_show_behavior();
+		$this->show_behavior = new photographerdefault_show_behavior();
 		$this->protected = true;
+		$this->allowed_role = "photographer";
 	}
-
 }
 ?>

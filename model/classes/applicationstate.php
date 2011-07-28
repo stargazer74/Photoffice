@@ -121,6 +121,16 @@ class application
 		}
 		return $_SESSION['roles'];	
 	}
+	
+	public function _getActualView()
+	{
+		$_SESSION['actualview'] = 'defaultcontroller';
+		if (!isset($_SESSION['actualview'])) 
+		{
+			$_SESSION['actualview'] = 'defaultcontroller';
+		}
+		return $_SESSION['actualview'];
+	}
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -191,6 +201,11 @@ class application
 	public function _setAktuelleBestellung($value)
 	{
 		$_SESSION['aktuelleBestellung'] = $value;
+	}
+	
+	public function _setActualView($value)
+	{
+		$_SESSION['actualview'] = $value;
 	}
 	
 	public function _addRole($role)

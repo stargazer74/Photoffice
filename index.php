@@ -29,7 +29,6 @@ require_once('Mail.php');
 //
 ////////////////////////////////////////////////////////////////////////////////////
 require_once('./controller/actionbehaviors/standard_action_behavior.php');
-require_once('./controller/actionbehaviors/onlineshopstandard_action_behavior.php');
 require_once('./controller/actionbehaviors/ajaxdelete_action_behavior.php');
 require_once('./controller/actionbehaviors/kundedelete_action_behavior.php');
 require_once('./controller/actionbehaviors/applicationstate_action_behavior.php');
@@ -160,11 +159,12 @@ require_once("./model/classes/zahlungsart.php");
 // view Includes
 //
 ////////////////////////////////////////////////////////////////////////////////////
-require_once('./view/photographer/default.php');
-require_once('./view/kundendefault.php');
+require_once('./view/photographer/photographerdefault.php');
+require_once('./view/customer/kundendefault.php');
+require_once('./view/public/default.php');
 require_once('./view/view.php');
 require_once('./view/showbehavior.php');
-require_once('./view/showbehaviors/default_show_behavior.php');
+require_once('./view/showbehaviors/photographerdefault_show_behavior.php');
 require_once('./view/showbehaviors/mainnavigation_show_behavior.php');
 require_once('./view/showbehaviors/login_show_behavior.php');
 require_once('./view/showbehaviors/statusbox_show_behavior.php');
@@ -230,19 +230,19 @@ require_once('./view/photographer/bilder.php');
 require_once('./view/photographer/allegalerien.php');
 require_once('./view/photographer/neuegalerie.php');
 require_once('./view/photographer/einzelgalerie.php');
-require_once('./view/kundeeinzelgalerie.php');
+require_once('./view/customer/kundeeinzelgalerie.php');
 require_once('./view/photographer/galerieaendern.php');
 require_once('./view/photographer/bilduebersicht.php');
 require_once('./view/photographer/bilddetails.php');
 require_once('./view/photographer/fotografenliste.php');
 require_once('./view/photographer/fotografaendern.php');
 require_once('./view/photographer/neufotograf.php');
-require_once('./view/kundenlogin.php');
-require_once('./view/kundenlogout.php');
+require_once('./view/public/kundenlogin.php');
+require_once('./view/public/kundenlogout.php');
 require_once('./view/customer/allekundengalerien.php');
-require_once('./view/kundeagb.php');
-require_once('./view/preisliste.php');
-require_once('./view/warenkorb.php');
+require_once('./view/customer/kundeagb.php');
+require_once('./view/customer/preisliste.php');
+require_once('./view/customer/warenkorb.php');
 require_once('./view/photographer/bestellungsliste.php');
 require_once('./view/photographer/bestellungslisteinhalt.php');
 require_once('./view/photographer/bestellungsdaten.php');
@@ -250,7 +250,7 @@ require_once('./view/photographer/bestellungabschliessen.php');
 require_once('./view/photographer/generierebestellungspdf.php');
 require_once('./view/photographer/oeffentlichegalerien.php');
 require_once('./view/photographer/neueoeffentlichegalerie.php');
-require_once('./view/onlineshop.php');
+require_once('./view/public/onlineshop.php');
 
 session_start();
 

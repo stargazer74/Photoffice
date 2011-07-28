@@ -26,6 +26,8 @@ class kundenlogincheck
 		}//end foreach
 		if($tmp == 1)
 		{
+			$applicationstate = application::getInstance();
+			$applicationstate->_addRole("customer");
 			return TRUE;
 
 		}else{//end if

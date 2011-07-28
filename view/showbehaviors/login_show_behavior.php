@@ -52,8 +52,6 @@ class login_show_behavior implements showbehavior
 			$renderer->setErrorTemplate('');
 			$form->accept($renderer);
 		}else{
-			$applicationstate = application::getInstance();
-			$applicationstate->_addRole("photographer");
 			header("Location:./index.html");
 		}
 

@@ -36,17 +36,10 @@ abstract class controller
 			}else{
 				throw new Exception(sprintf('Konnte kein Objekt vom Typ %s erzeugen!', 'UserInterface_' .$type));
 			}
-		}else{
-			//@TODO depricated use role instead
-			if (isset($_SESSION['kundelogged']) )
-			{
-				return $object = controller::_controllerFactory('kundendefaultcontroller');
-			}elseif (isset($_SESSION['onlineshoplogged']))
-			{
-				return $object = controller::_controllerFactory('onlineshopdefaultcontroller');
-			}else{
-				return $object = controller::_controllerFactory('defaultcontroller');
-			}
+		}else
+		{
+			//@TODO instead showing the default_view it should show the actual view
+			return $object = controller::_controllerFactory(application::getInstance()->_getActualView());
 		}
 	}//end function factory
 
