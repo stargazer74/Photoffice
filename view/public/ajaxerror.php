@@ -8,14 +8,13 @@ require_once('./view/view.php');
 *
 */
 
-class photographerdefault_view extends view
+class ajaxerror_view extends view
 {
 	public function __construct()
 	{
 		self::$instance_view = $this;
-		$this->show_behavior = new photographerdefault_show_behavior();
-		$this->protected = true;
-		$this->allowed_role = "photographer";
+		$this->show_behavior = new ajaxerror_show_behavior();
+		$this->protected = false;
 	}
 }
 ?>

@@ -52,7 +52,7 @@ class login_show_behavior implements showbehavior
 			$renderer->setErrorTemplate('');
 			$form->accept($renderer);
 		}else{
-			header("Location:./index.html");
+			header("Location:./fotografstart.html");
 		}
 
 		$this->tpl->show();

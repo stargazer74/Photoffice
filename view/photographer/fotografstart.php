@@ -8,13 +8,14 @@ require_once('./view/view.php');
 *
 */
 
-class default_view extends view
+class fotografstart_view extends view
 {
 	public function __construct()
 	{
 		self::$instance_view = $this;
-		$this->show_behavior = new login_show_behavior();
-		$this->protected = false;
+		$this->show_behavior = new fotografstart_show_behavior();
+		$this->protected = true;
+		$this->allowed_role = "photographer";
 	}
 }
 ?>

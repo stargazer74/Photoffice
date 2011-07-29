@@ -8,7 +8,7 @@ require_once ('./controller/action.php');
  *
  */
 
-class standard_action_behavior implements action 
+class ajaxstd_action_behavior implements action 
 {
 	
 	private $controller;
@@ -29,7 +29,6 @@ class standard_action_behavior implements action
 
 		if(class_exists($this->controller.'_view'))
 		{
-			application::getInstance()->_setActualView($this->controller);
 			$class = $this->controller.'_view';
 			$viewobject = new $class;
 			if($viewobject->_getProtectionState() == false)
@@ -77,7 +76,7 @@ class standard_action_behavior implements action
 				
 		}else{
 			//@TODO don't switch to defaultcontroller, show actuel view instead
-			$object = controller::_controllerFactory(application::getInstance()->_getActualView());
+			$object = controller::_controllerFactory('ajaxerror');
 			$object->_tuaction();
 		}
 

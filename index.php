@@ -85,6 +85,7 @@ require_once('./controller/bestellungabschliessen.php');
 require_once('./controller/oeffentlichegalerien.php');
 require_once('./controller/neueoeffentlichegalerie.php');
 require_once('./controller/ajaxupdate.php');
+require_once('./controller/fotografstart.php');
 
 ////////////////////////////////////////////////////////////////////////////////////
 //
@@ -159,12 +160,12 @@ require_once("./model/classes/zahlungsart.php");
 // view Includes
 //
 ////////////////////////////////////////////////////////////////////////////////////
-require_once('./view/photographer/photographerdefault.php');
+require_once('./view/photographer/fotografstart.php');
 require_once('./view/customer/kundendefault.php');
 require_once('./view/public/default.php');
 require_once('./view/view.php');
 require_once('./view/showbehavior.php');
-require_once('./view/showbehaviors/photographerdefault_show_behavior.php');
+require_once('./view/showbehaviors/fotografstart_show_behavior.php');
 require_once('./view/showbehaviors/mainnavigation_show_behavior.php');
 require_once('./view/showbehaviors/login_show_behavior.php');
 require_once('./view/showbehaviors/statusbox_show_behavior.php');
