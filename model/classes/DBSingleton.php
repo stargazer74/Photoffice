@@ -29,8 +29,8 @@ class DBSINGLETON
 		{
 			self::$dsn = "mysqli://" . self::$user . ":" . self::$pass . "@" . self::$host . "/" . self::$db_name;
 			
-			self::$uniqueDBInstance = DB::connect(self::$dsn);
-			if(DB::isError(self::$uniqueDBInstance))
+			self::$uniqueDBInstance =  MDB2::connect(self::$dsn);
+			if(MDB2::isError(self::$uniqueDBInstance))
 			{
 				echo 'Standard Message: ' . self::$uniqueDBInstance->getMessage() . "\n";
     			echo 'Standard Code: ' . self::$uniqueDBInstance->getCode() . "\n";

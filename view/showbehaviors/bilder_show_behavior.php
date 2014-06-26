@@ -51,7 +51,7 @@ class bilder_show_behavior implements showbehavior
 		$this->tpl->touchBlock('CONTENT');
 
 		$breadcrumbInstance = new breadcrumb('Galerien');
-		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
+		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();	
 		foreach($breadcrumbArray as $key => $data)
 		{
 			$this->tpl->setCurrentBlock('BREADCRUMBNAVI');

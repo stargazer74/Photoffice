@@ -3,7 +3,7 @@
 	<DatabaseServer>localhost</DatabaseServer>
 	<DatabaseUser>root</DatabaseUser>
 	<DatabasePassphrase></DatabasePassphrase>
-	<DatabaseName>fotoffice</DatabaseName>
+	<DatabaseName>photoffice</DatabaseName>
 	<SerialNumber>local</SerialNumber>
 	<VersionNumber>1.0.2.1</VersionNumber>
 	<XmlRpcString>http://localhost/homepage_photoffice/photofficevalidate.html</XmlRpcString></config>
