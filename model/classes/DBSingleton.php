@@ -29,7 +29,7 @@ class DBSINGLETON
 		{
 			self::$dsn = "mysqli://" . self::$user . ":" . self::$pass . "@" . self::$host . "/" . self::$db_name;
 			
-			self::$uniqueDBInstance =  MDB2::connect(self::$dsn);
+			self::$uniqueDBInstance =  MDB2::factory(self::$dsn);
 			self::$uniqueDBInstance->loadModule('Extended');
 			if(MDB2::isError(self::$uniqueDBInstance))
 			{
