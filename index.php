@@ -19,6 +19,7 @@ ini_set("include_path", $my_pear_path . PATH_SEPARATOR . ini_get("include_path")
 require_once("HTML/Template/ITX.php");
 require_once("Event/Dispatcher.php");
 require_once("MDB2.php");
+require_once("MDB2/Extended.php");
 require_once("HTML/QuickForm2.php");
 require_once("HTML/QuickForm2/Renderer/ITStatic.php");
 require_once('Pager.php');
