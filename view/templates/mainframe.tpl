@@ -7,7 +7,7 @@
         <!-- BEGIN CSSINCLUDES -->
         <link href="./view/css/{CSS}.css" rel="stylesheet" type="text/css" />
         <!-- END CSSINCLUDES -->
-        <script type="text/javascript" src="./view/js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="./view/js/jquery-2.1.1.js"></script>
         <!-- BEGIN JSINCLUDES -->
         <script type="text/javascript" src="./view/js/{JAVASCRIPT}.js"></script>
         <!-- END JSINCLUDES -->
