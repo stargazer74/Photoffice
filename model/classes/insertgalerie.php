@@ -53,7 +53,7 @@ class insertgalerie extends database implements insertinterface
 			}
 		}
 
-		if (mkdir($_SERVER['DOCUMENT_ROOT'].'/photoffice/view/images/galeriebilder/'.$letzteID) && chmod($_SERVER['DOCUMENT_ROOT'].'/photoffice/view/images/galeriebilder/'.$letzteID, 0777))
+		if (mkdir('./view/images/galeriebilder/'.$letzteID) && chmod('./view/images/galeriebilder/'.$letzteID, 0777))
 		{
 			return true;
 		}else{

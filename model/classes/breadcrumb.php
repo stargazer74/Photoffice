@@ -17,9 +17,12 @@ class breadcrumb
 		$db = new database();
 		$resultarray = $db->_getNavigation();
 		$breadcrumb = array();
-		foreach($resultarray as $data)
+		if (is_array($resultarray))
 		{
-			$breadcrumb[$data['name']] = $data;
+			foreach($resultarray as $data)
+			{
+				$breadcrumb[$data['name']] = $data;
+			}
 		}
 		//print_r($breadcrumb);
 		return $breadcrumb;
@@ -29,40 +32,69 @@ class breadcrumb
 	{
 		//print_r($this->navigationFromDatabase);
 		$i = FALSE;
-		foreach($this->navigationFromDatabase as $data)
+		if (is_array($this->navigationFromDatabase))
 		{
-			if(strtolower($data[name]) == strtolower($this->aktuellerNavipunkt))
+			foreach($this->navigationFromDatabase as $data)
 			{
-				$i = TRUE;
-			}			
+				if(isset($data['name']) && strtolower($data['name']) == strtolower($this->aktuellerNavipunkt))
+				{
+					$i = TRUE;
+				}			
+			}
 		}
 		return $i;
+	}
+
+	private function _getMatchedNaviEntry()
+	{
+		if (is_array($this->navigationFromDatabase))
+		{
+			foreach($this->navigationFromDatabase as $data)
+			{
+				if(isset($data['name']) && strtolower($data['name']) == strtolower($this->aktuellerNavipunkt))
+				{
+					return $data;
+				}
+			}
+		}
+		return null;
 	}
 	
 	public function _getBreadcrumbArray()
 	{
 		$breadcrumb = array();
-		$breadcrumb = array('Home' => 'index.html');		
+		$breadcrumb = array('Home' => 'fotografstart.html');
 		if($this->_checkIfNavigationPointExists())
 		{
+			$matchedEntry = $this->_getMatchedNaviEntry();
 			//aktuelle ParentID rausfinden
-			$aktuelleParentId = $this->navigationFromDatabase[$this->aktuellerNavipunkt]['idparent'];
-			$aktuellerName = $this->navigationFromDatabase[$this->aktuellerNavipunkt]['name'];
-			$aktuellerLink = strtolower($this->navigationFromDatabase[$this->aktuellerNavipunkt]['link']);
+			$aktuelleParentId = isset($matchedEntry['idparent']) ? $matchedEntry['idparent'] : 0;
+			$aktuellerName = isset($matchedEntry['name']) ? $matchedEntry['name'] : $this->aktuellerNavipunkt;
+			$aktuellerLink = isset($matchedEntry['link']) ? strtolower($matchedEntry['link']) : strtolower($this->aktuellerNavipunkt).'.html';
 			$temparray = array();
 			//Navigation so lange duchlaufen, bis die ParentId Null ist.
 			//Dabei das temporäre Array auffüllen.
-			do
+			$visitedIds = array();
+			while($aktuelleParentId != 0 && !in_array($aktuelleParentId, $visitedIds))
 			{
+				$visitedIds[] = $aktuelleParentId;
+				$foundParent = false;
 				foreach($this->navigationFromDatabase as $key => $value)
 				{
-					if($aktuelleParentId == $value['idnavigation'])
+					if(isset($value['idnavigation']) && $aktuelleParentId == $value['idnavigation'])
 					{
-						$temparray[$value['name']] = $value['linkname'];
-						$aktuelleParentId = $value['idparent'];
+						$link = isset($value['link']) ? $value['link'] : (isset($value['linkname']) ? $value['linkname'] : '');
+						$temparray[$value['name']] = $link;
+						$aktuelleParentId = isset($value['idparent']) ? $value['idparent'] : 0;
+						$foundParent = true;
+						break;
 					}
 				}
-			}while($aktuelleParentId != 0);
+				if (!$foundParent)
+				{
+					break;
+				}
+			}
 			//array in die richtige Reihenfolge bringen
 			
 			$temparray = array_reverse($temparray);
@@ -75,7 +107,12 @@ class breadcrumb
 			$breadcrumb[$aktuellerName] = $aktuellerLink;
 			return $breadcrumb;
 		}
-		return FALSE;
+		else if(!empty($this->aktuellerNavipunkt))
+		{
+			$breadcrumb[$this->aktuellerNavipunkt] = strtolower($this->aktuellerNavipunkt).'.html';
+			return $breadcrumb;
+		}
+		return $breadcrumb;
 	}
 	
 }

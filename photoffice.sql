@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `fotograf` (
 --
 
 INSERT INTO `fotograf` (`idfotograf`, `Firma_idFirma`, `vorname`, `name`, `loginname`, `passwort`) VALUES
-(1, 1, 'Max', 'Mustermann', 'admin', 'a3b9c163f6c520407ff34cfdb83ca5c6');
+(1, 1, 'Max', 'Mustermann', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 

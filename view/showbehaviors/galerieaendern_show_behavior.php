@@ -133,7 +133,7 @@ class galerieaendern_show_behavior implements showbehavior
 
 				$body = 'Sehr geehrter Kunde,
 				dies ist eine automatisch erzeugte Mail. Eine neue Galerie wurde für Sie freigeschaltet.
-				Sie können sich unter: '.$_SERVER['HTTP_HOST'].'/photoffice/kundenlogin.html einloggen.
+				Sie können sich unter: '.$_SERVER['HTTP_HOST'].'/kundenlogin.html einloggen.
 				Ihr Passwort lautet: '.$passphrase;
 
 				$mail_object = Mail::factory('mail');

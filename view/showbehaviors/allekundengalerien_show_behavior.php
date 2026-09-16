@@ -40,12 +40,15 @@ class allekundengalerien_show_behavior implements showbehavior
 		
 		$breadcrumbInstance = new breadcrumb('Bilder');
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
-		foreach($breadcrumbArray as $key => $data)
+		if (is_array($breadcrumbArray))
 		{
-			$this->tpl->setCurrentBlock('BREADCRUMBNAVI');
-			$this->tpl->setVariable('BREADCRUMBLINK', $data);
-			$this->tpl->setVariable('BREADCRUMBNAME', $key);
-			$this->tpl->parseCurrentBlock("BREADCRUMBNAVI");
+			foreach($breadcrumbArray as $key => $data)
+			{
+				$this->tpl->setCurrentBlock('BREADCRUMBNAVI');
+				$this->tpl->setVariable('BREADCRUMBLINK', $data);
+				$this->tpl->setVariable('BREADCRUMBNAME', $key);
+				$this->tpl->parseCurrentBlock("BREADCRUMBNAVI");
+			}
 		}
 		
 		$this->tpl->addBlockfile('CONTENT', 'content', 'allekundengalerien.tpl');

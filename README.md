@@ -93,8 +93,9 @@ docker compose up -d
 
 - **Web-Container (`photoffice-web`)**: PHP 5.6 mit Apache und allen erforderlichen PEAR-Paketen/Extensions auf Port `8080`.
 - **Datenbank-Container (`photoffice-db`)**: MySQL 5.7 auf Port `3306`.
+- **phpMyAdmin-Container (`photoffice-phpmyadmin`)**: phpMyAdmin auf Port `8081` zur Datenbankverwaltung.
 
-Die Anwendung ist anschließend unter `http://localhost:8080/` im Browser erreichbar.
+Die Anwendung ist anschließend unter `http://localhost:8080/` und phpMyAdmin unter `http://localhost:8081/` im Browser erreichbar.
 
 ---
 

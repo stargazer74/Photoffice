@@ -81,14 +81,17 @@ class kundeeinzelgalerie_show_behavior implements showbehavior
 
 		$breadcrumbInstance = new breadcrumb('Bilder');
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
-		$aktuelleGalerieNaviPoint = array($aktuelleGalerie['galeriename'] => 'javascript:void()');
-		$breadcrumbArray = array_merge($breadcrumbArray, $aktuelleGalerieNaviPoint);
-		foreach($breadcrumbArray as $key => $data)
+		if (is_array($breadcrumbArray))
 		{
-			$this->tpl->setCurrentBlock('BREADCRUMBNAVI');
-			$this->tpl->setVariable('BREADCRUMBLINK', $data);
-			$this->tpl->setVariable('BREADCRUMBNAME', $key);
-			$this->tpl->parseCurrentBlock("BREADCRUMBNAVI");
+			$aktuelleGalerieNaviPoint = array($aktuelleGalerie['galeriename'] => 'javascript:void()');
+			$breadcrumbArray = array_merge($breadcrumbArray, $aktuelleGalerieNaviPoint);
+			foreach($breadcrumbArray as $key => $data)
+			{
+				$this->tpl->setCurrentBlock('BREADCRUMBNAVI');
+				$this->tpl->setVariable('BREADCRUMBLINK', $data);
+				$this->tpl->setVariable('BREADCRUMBNAME', $key);
+				$this->tpl->parseCurrentBlock("BREADCRUMBNAVI");
+			}
 		}
 
 		$this->tpl->addBlockfile('CONTENT', 'content', 'kundeeinzelgalerie.tpl');
