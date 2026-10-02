@@ -10,6 +10,7 @@
 - [Systemvoraussetzungen](#systemvoraussetzungen)
 - [Installation & Konfiguration](#installation--konfiguration)
 - [Docker-Setup](#docker-setup)
+- [Schnellstart mit Demo-Daten](#schnellstart-mit-demo-daten)
 - [Entwicklung & Tests](#entwicklung--tests)
 - [Architektur](#architektur)
 - [Lizenz](#lizenz)
@@ -96,6 +97,60 @@ docker compose up -d
 - **phpMyAdmin-Container (`photoffice-phpmyadmin`)**: phpMyAdmin auf Port `8081` zur Datenbankverwaltung.
 
 Die Anwendung ist anschließend unter `http://localhost:8080/` und phpMyAdmin unter `http://localhost:8081/` im Browser erreichbar.
+
+Beim ersten Start legt der `db`-Container die Datenbank `fotoffice` an und führt dabei automatisch alle Skripte aus `docker-entrypoint-initdb.d` aus:
+
+1. `photoffice.sql` – Datenbankstruktur inkl. Admin-Login `admin` / `password`.
+2. `photoffice_seed.sql` – Demo-/Beispieldaten (Firma, weitere Fotografen, Kunden, Preisliste, Beispielgalerie).
+
+> **Hinweis:** Die Init-Skripte laufen nur, wenn das Volume `db_data` noch leer ist. Wurde der Container bereits zuvor gestartet, müssen Sie das Volume zurücksetzen, um die Demo-Daten neu einzuspielen (siehe [Schnellstart mit Demo-Daten](#schnellstart-mit-demo-daten)).
+
+---
+
+## Schnellstart mit Demo-Daten
+
+Mit `photoffice_seed.sql` steht eine vollständige Demo-Umgebung zur Verfügung, mit der sich die Anwendung direkt nach dem Start ausprobieren lässt – ohne eigene Daten anlegen zu müssen.
+
+### Umgebung frisch aufsetzen
+
+Damit die Demo-Daten eingespielt werden, darf das Datenbank-Volume noch nicht existieren bzw. muss vorher entfernt werden:
+
+```bash
+docker compose down -v   # entfernt auch das db_data-Volume
+docker compose up -d
+```
+
+Anschließend ist die Anwendung unter `http://localhost:8080/` erreichbar.
+
+### Fotografen-/Admin-Login
+
+Zugang für die Studio-/Backend-Verwaltung unter `http://localhost:8080/` (Login-Formular `view/public/login.php`):
+
+| Benutzer | Login       | Passwort     |
+|----------|-------------|--------------|
+| Admin    | `admin`     | `password`   |
+| Julia    | `julia`     | `julia2026`  |
+| Tom      | `tom`       | `tom2026`    |
+
+### Kunden-Login (Kundenportal)
+
+Das Kundenportal (`kundenlogin.html`) fragt **ausschließlich ein Passwort** ab (keine Benutzername-/E-Mail-Prüfung) – der passende Kunde wird anhand des Passworts ermittelt:
+
+| Kunde            | Passwort       | Zugriff auf Galerie         |
+|-------------------|---------------|------------------------------|
+| Anna Schmidt      | `anna2026`    | Galerie 28 „Hochzeit Schmidt“ |
+| Thomas Schmidt     | `thomas2026`  | Galerie 28 „Hochzeit Schmidt“ |
+| Laura Meier        | `laura2026`   | keine Galerie zugewiesen     |
+| Peter Wagner       | `peter2026`   | keine Galerie zugewiesen     |
+
+### Enthaltene Demo-Inhalte
+
+- **Firma:** „Photoffice Demo GmbH“ inkl. Beispiel-AGB.
+- **Fotografen:** `admin` (aus `photoffice.sql`) sowie `julia` und `tom` (aus dem Seed).
+- **Beispielgalerie:** Galerie 28 „Hochzeit Schmidt“ mit 6 Beispielbildern aus `view/images/galeriebilder/28/`.
+- **Kunden:** 4 Beispielkunden, davon 2 mit Zugriff auf die Beispielgalerie.
+- **Preisliste:** Papierarten (Glänzend/Matt) × Bildformate (10x15 bis 20x30) mit Preisen.
+- **Zahlungs- und Versandarten:** Rechnung, PayPal, Vorkasse (Nachnahme deaktiviert), Standard- und Expressversand.
 
 ---
 
