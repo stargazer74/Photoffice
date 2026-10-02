@@ -1,4 +1,4 @@
-FROM php:5.6-apache
+FROM php:5.6-apache AS base
 
 # Fix debian archive mirrors for older debian releases
 RUN if [ -f /etc/apt/sources.list ]; then \
@@ -33,3 +33,16 @@ RUN a2enmod rewrite
 RUN echo "date.timezone = Europe/Berlin" > /usr/local/etc/php/conf.d/timezone.ini
 
 WORKDIR /var/www/html
+
+# --- "base" stage (used by docker-compose.yml / Entwicklung) ---
+# Enthält nur die Laufzeitumgebung, keinen App-Code. Der Code kommt im
+# Entwicklungs-Setup per Bind-Mount (.:/var/www/html) vom Host und wird
+# dadurch ohnehin überlagert – ein COPY wäre hier unnötig.
+
+# --- "prod" stage (used by docker-compose.prod.yml / Produktion) ---
+# Baut auf "base" auf und kopiert den App-Code fest ins Image. Dadurch ist
+# das Image in sich geschlossen und unabhängig von Host-Dateirechten/
+# SELinux-Labels (siehe Troubleshooting-Abschnitt in der README zu
+# ".htaccess"-Fehlern).
+FROM base AS prod
+COPY --chown=www-data:www-data . /var/www/html

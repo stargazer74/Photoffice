@@ -11,6 +11,7 @@
 - [Installation & Konfiguration](#installation--konfiguration)
 - [Docker-Setup](#docker-setup)
 - [Schnellstart mit Demo-Daten](#schnellstart-mit-demo-daten)
+- [Troubleshooting](#troubleshooting)
 - [Entwicklung & Tests](#entwicklung--tests)
 - [Architektur](#architektur)
 - [Lizenz](#lizenz)
@@ -105,6 +106,17 @@ Beim ersten Start legt der `db`-Container die Datenbank `fotoffice` an und führ
 
 > **Hinweis:** Die Init-Skripte laufen nur, wenn das Volume `db_data` noch leer ist. Wurde der Container bereits zuvor gestartet, müssen Sie das Volume zurücksetzen, um die Demo-Daten neu einzuspielen (siehe [Schnellstart mit Demo-Daten](#schnellstart-mit-demo-daten)).
 
+### Entwicklung vs. Produktion
+
+Das `Dockerfile` ist ein Multi-Stage-Build mit zwei Stages, auf die die beiden Compose-Dateien jeweils zielen:
+
+- **`docker-compose.yml` (Standard, Entwicklung)** baut die Stage `base`: Sie enthält nur die Laufzeitumgebung (PHP, Apache, PEAR-Pakete), aber **keinen App-Code**. Der Code wird stattdessen per Bind-Mount (`.:/var/www/html`) aus dem Projektverzeichnis in den Container eingebunden. Codeänderungen sind dadurch sofort ohne Rebuild sichtbar. Dafür gelten im Container exakt die Dateirechte/SELinux-Labels des Host-Dateisystems (siehe [Troubleshooting](#troubleshooting)).
+- **`docker-compose.prod.yml` (Produktion/Release)** baut die Stage `prod`, die auf `base` aufsetzt und den App-Code zusätzlich per `COPY` fest ins Image backt (kein Bind-Mount für den Code). Das Image ist dadurch in sich geschlossen und unabhängig von Host-Dateirechten. Nach Codeänderungen ist ein Rebuild nötig:
+
+```bash
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
 ---
 
 ## Schnellstart mit Demo-Daten
@@ -151,6 +163,58 @@ Das Kundenportal (`kundenlogin.html`) fragt **ausschließlich ein Passwort** ab 
 - **Kunden:** 4 Beispielkunden, davon 2 mit Zugriff auf die Beispielgalerie.
 - **Preisliste:** Papierarten (Glänzend/Matt) × Bildformate (10x15 bis 20x30) mit Preisen.
 - **Zahlungs- und Versandarten:** Rechnung, PayPal, Vorkasse (Nachnahme deaktiviert), Standard- und Expressversand.
+
+---
+
+## Troubleshooting
+
+### „Forbidden – Server unable to read htaccess file, denying access to be safe“
+
+Dieser Fehler kann direkt nach einem frischen `git clone` + `docker compose up` auf manchen Servern auftreten – und zwar unabhängig von der konkret aufgerufenen URL, also auch schon beim Aufruf von `http://localhost:8080/`. Das liegt daran, dass Apache wegen `AllowOverride All` bei **jeder** Anfrage in `/var/www/html` versucht, die `.htaccess`-Datei zu lesen. Kann die Datei nicht gelesen werden, blockiert Apache den **gesamten** Verzeichnisbaum mit `403 Forbidden` – unabhängig davon, ob die aufgerufene URL überhaupt eine Rewrite-Regel betrifft.
+
+Da `.htaccess` per Bind-Mount (`.:/var/www/html`) aus dem Projektverzeichnis in den Container eingebunden wird, gelten dafür exakt die **Dateirechte des Host-Dateisystems**. Ursache ist daher in der Regel eines der beiden folgenden Probleme auf dem Server (nicht ein Fehler in `Dockerfile`/`docker-compose.yml`):
+
+**1. Dateirechte nach dem Checkout zu restriktiv** (z. B. durch einen restriktiven `umask` beim Klonen, besonders wenn als `root` ausgecheckt wird), sodass der Apache-Prozess im Container (`www-data`, UID 33) die Datei nicht lesen darf.
+
+Fix:
+```bash
+chmod -R a+rX .
+```
+
+**2. SELinux auf dem Host** (häufig bei RHEL/CentOS/Fedora/Rocky-Servern). SELinux kann den Zugriff des Container-Prozesses auf bind-gemountete Host-Dateien blockieren, selbst wenn die Unix-Dateirechte passen – mit exakt diesem Fehlerbild.
+
+Fix: Entweder den Mount in `docker-compose.yml` mit `:z` versehen
+```yaml
+volumes:
+  - .:/var/www/html:z
+```
+oder das Verzeichnis einmalig labeln:
+```bash
+sudo chcon -Rt container_file_t .
+```
+
+**Zur Eingrenzung auf dem betroffenen Server:**
+```bash
+# Dateirechte auf dem Host prüfen
+ls -la .htaccess
+
+# Wie sieht es innerhalb des Containers aus (nach Bind-Mount)?
+docker exec photoffice-web ls -la /var/www/html/.htaccess
+
+# Ist SELinux aktiv?
+getenforce
+
+# Genaue Fehlermeldung im Apache-Error-Log
+docker exec photoffice-web tail -20 /var/log/apache2/error.log
+```
+
+**Alternative ohne Abhängigkeit von Host-Dateirechten:** Da die Ursache stets der Bind-Mount des App-Codes ist, lässt sich das Problem auch grundsätzlich vermeiden, indem der Code beim Image-Build per `COPY` fest ins Image gebacken wird, statt ihn zur Laufzeit vom Host einzubinden. Dafür steht `docker-compose.prod.yml` bereit (siehe [Entwicklung vs. Produktion](#entwicklung-vs-produktion)):
+
+```bash
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+In diesem Modus spielen Dateirechte/SELinux-Labels auf dem Host keine Rolle mehr, da `.htaccess` & Co. Teil des Images sind. Der Nachteil: Codeänderungen erfordern danach jeweils einen Rebuild (`--build`).
 
 ---
 

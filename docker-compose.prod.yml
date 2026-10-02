@@ -2,12 +2,18 @@ services:
   web:
     build:
       context: .
-      target: base
+      target: prod
     container_name: photoffice-web
     ports:
       - "8080:80"
-    volumes:
-      - .:/var/www/html
+    # Kein Bind-Mount für den App-Code: Der komplette Code wurde bereits
+    # beim "docker compose build" (Stage "prod" im Dockerfile) per COPY ins
+    # Image kopiert. Dadurch entfällt die Abhängigkeit von Host-Dateirechten/
+    # SELinux (siehe Troubleshooting-Abschnitt in der README zu
+    # ".htaccess"-Fehlern).
+    #
+    # Hinweis: Codeänderungen erfordern danach einen Rebuild, z. B.:
+    #   docker compose -f docker-compose.prod.yml up -d --build
     depends_on:
       - db
     restart: unless-stopped
