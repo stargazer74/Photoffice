@@ -16,24 +16,23 @@ class warenkorb_show_behavior implements showbehavior
 		$this->tpl = singletonTemplate::getInstance();
 		$db = new database();
 		$this->tpl->loadTemplateFile('warenkorb.tpl');
-		$this->tpl->touchBlock('WARENKORB');
-		
-		//aktuelle Bestellung
-		$alleBestellungenInstance = $db->_getBestellungen();
-		$alleBestellungenArray = $alleBestellungenInstance->_ausgeben();
+
+		//aktuelle Bestellung liegt (wie in kundeeinzelgalerie_show_behavior.php)
+		//ausschliesslich in der Session, nicht in der DB - erst beim
+		//endgueltigen Absenden (bestellungabsenden) wird daraus ein
+		//DB-Datensatz.
+		$applicationStateInstance = application::getInstance();
+		$aktuelleBestellungInstance = $applicationStateInstance->_getAktuelleBestellung();
 		$aktuelleBestellung = null;
-		foreach ($alleBestellungenArray as $data)
+		if ($aktuelleBestellungInstance)
 		{
-			if ($data['id'] == $_SESSION['bestellungid'])
-			{
-				$aktuelleBestellung = $data;
-			}
+			$aktuelleBestellung = $aktuelleBestellungInstance->_ausgeben();
 		}
-		if (count($aktuelleBestellung) == 0)
+		if ($aktuelleBestellung == null || count($aktuelleBestellung['bilder']) == 0)
 		{
-			$this->tpl->setVariable('GESAMTPREIS', '0.00');			
+			$this->tpl->setCurrentBlock('WARENKORB');
+			$this->tpl->setVariable('GESAMTPREIS', '0.00');
 		}else{
-			//@TODO hier darf nich mehr aus der DB ausgelesen werden
 			$distinctAktuelleBestellung = array();
 			foreach ($aktuelleBestellung['bilder'] as $bestellungdaten)
 			{
@@ -85,9 +84,11 @@ class warenkorb_show_behavior implements showbehavior
 					}
 				}
 			}
-			$this->tpl->setVariable('GESAMTPREIS', $aktuelleBestellung['bestellwert']);
+			$this->tpl->setCurrentBlock('WARENKORB');
+			$this->tpl->setVariable('GESAMTPREIS', string::genPreisString($aktuelleBestellung['bestellwert']));
 		}
 
+		$this->tpl->touchBlock('WARENKORB');
 		$this->tpl->show();
 	}
 }

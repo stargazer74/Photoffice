@@ -134,6 +134,26 @@ CREATE TABLE IF NOT EXISTS `navigation` (
   PRIMARY KEY (`idnavigation`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
+--
+-- Daten für Tabelle `navigation`
+--
+-- breadcrumb.php schlägt hier für jeden Breadcrumb-Punkt den Link nach;
+-- ohne diese Einträge fällt es auf strtolower(name).'.html' zurück, was z.B.
+-- bei "Galerien" auf das nicht existierende galerien.html zeigt und über
+-- controller::_controllerFactory() auf die Login-Seite umleitet.
+--
+
+INSERT INTO `navigation` (`idnavigation`, `idparent`, `name`, `link`) VALUES
+(1, 0, 'Galerien', 'bilder.html'),
+(2, 0, 'Bilder', 'allekundengalerien.html'),
+(3, 0, 'Kunden', 'kunden.html'),
+(4, 0, 'Bestellungen', 'bestellungsliste.html'),
+(5, 0, 'Preisliste', 'preisliste.html'),
+(6, 0, 'AGB', 'kundeagb.html'),
+(7, 0, 'Firmendaten', 'firmendaten.html');
+
+-- --------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS `papier` (
   `idPapier` int(11) NOT NULL AUTO_INCREMENT,
   `papiertyp` varchar(45) NOT NULL,

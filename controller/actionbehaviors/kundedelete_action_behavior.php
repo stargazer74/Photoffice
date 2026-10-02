@@ -18,9 +18,11 @@ class kundedelete_action_behavior implements action
 		$db= new database();
 		switch ($_REQUEST['was'])
 		{				
-			case warenkorb:			
-				$db->_delete($_REQUEST['was'], $_SESSION['bestellungid']);
-				$_SESSION['bestellungid'] = '';
+			case warenkorb:
+				// Der Warenkorb liegt ausschliesslich in der Session
+				// (application::_getAktuelleBestellung()), nicht in der DB -
+				// siehe bestellungeintragen_action_behavior.php.
+				application::getInstance()->_setAktuelleBestellung(null);
 				$this->controller = 'warenkorb';
 				break;
 				
@@ -37,8 +39,17 @@ class kundedelete_action_behavior implements action
 				//View anzeigen
 				$viewobject->_Show();
 			}else{
-			//@TODO depricated use role instead
-				if($_SESSION['kundelogged'] != md5('customergoforit'))
+				$allowedRole = $viewobject->_getAllowedRole();
+				$sessionRoles = application::getInstance()->_getRoles();
+				$match = false;
+				foreach ($sessionRoles as $role)
+				{
+					if (in_array(md5($allowedRole), $sessionRoles))
+					{
+						$match = true;
+					}
+				}
+				if(!$match)
 				{
 					//Loginview anzeigen
 					$viewobject = new kundenlogin_view();

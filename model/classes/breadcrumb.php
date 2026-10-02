@@ -5,10 +5,12 @@ class breadcrumb
 {
 	private $aktuellerNavipunkt;
 	private $navigationFromDatabase;
-	
-	public function __construct($aktuellerNavipunkt = NULL)
+	private $homeLink;
+
+	public function __construct($aktuellerNavipunkt = NULL, $homeLink = 'fotografstart.html')
 	{
 		$this->aktuellerNavipunkt = $aktuellerNavipunkt;
+		$this->homeLink = $homeLink;
 		$this->navigationFromDatabase = $this->_getNavigationFromDatabase();
 	}
 	
@@ -63,7 +65,7 @@ class breadcrumb
 	public function _getBreadcrumbArray()
 	{
 		$breadcrumb = array();
-		$breadcrumb = array('Home' => 'fotografstart.html');
+		$breadcrumb = array('Home' => $this->homeLink);
 		if($this->_checkIfNavigationPointExists())
 		{
 			$matchedEntry = $this->_getMatchedNaviEntry();

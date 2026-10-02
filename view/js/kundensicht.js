@@ -6,7 +6,11 @@ $(document).ready(function() {
     		txtPrev: "",
     		txtNext: ""
     };
-    $('a.singleimage').lightBox(settings);
+    // kundensicht.js wird auch auf der Galerie-Übersicht geladen, auf der es
+    // weder a.singleimage-Links noch das NFLightBox-Plugin gibt.
+    if ($.fn.lightBox) {
+    	$('a.singleimage').lightBox(settings);
+    }
 	
 	animatedcollapse.addDiv('bestellungbox', 'fade=0, hide=1');
 	animatedcollapse.addDiv('warenkorbbox', 'fade=0, hide=1');
@@ -28,9 +32,12 @@ $(document).ready(function() {
 		resetAnzahl();
 	});
 	
-	$('#papiergroesseselectbox').ajaxAddOption("getpapierformat.html");
-	
-	setPapierformatOptions();
+	// Die Bestell-Box (Papierformat-Auswahl) gibt es nur auf der
+	// Einzelgalerie-Seite, nicht auf der Galerie-Übersicht.
+	if ($('#papiergroesseselectbox').length) {
+		$('#papiergroesseselectbox').ajaxAddOption("getpapierformat.html");
+		setPapierformatOptions();
+	}
 
 	$('#warenkorbbox').load('warenkorb.html');
 	
@@ -98,21 +105,22 @@ function sendFormData()
 	        type: "POST", 
 	        url: "bestellungeintragen.html", 
 	        data: "anzahlbilder=" + anzahlbilder + "&papiertypid=" + papiertypid + "&groesse=" + groesse + bilder_string, 
-	        success: 
-	            function(t) 
-	            { 
-					$("div#errorfeld").append(t);					
-					$.ajax( { 
+	        success:
+	            function(t)
+	            {
+					$("div#errorfeld").append(t);
+					$('#warenkorbbox').load('warenkorb.html');
+					$.ajax( {
 						cache: false,
-				        type: "POST", 
+				        type: "POST",
 				        url: "getbildanzahlen.html",
 				        dataType: "json",
 				        success: function(map) {
-							
-							$.each(map, function(key, value) { 
-							  $('#'+key).text('bestellte Anzahl: '+value); 
+
+							$.each(map, function(key, value) {
+							  $('#'+key).text('bestellte Anzahl: '+value);
 							});
-				        }, 
+				        },
 				        error: 
 				            function() 
 				            { 

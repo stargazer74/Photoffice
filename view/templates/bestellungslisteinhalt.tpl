@@ -11,9 +11,9 @@
 			<div class="kundenliste float_left" style="width: 80px;">{KUNDENNUMMER}</div>
 			<div class="kundenliste float_left" style="width: 150px;">{NAME}</div>
 			<div class="kundenliste float_left" style="width: 150px;">{PREIS}</div>
-			<a class="update_button float_left" href="javascript:void()" onClick="javascript:showBestellDaten({BESTELLID})" title="Bestellung einsehen" ></a>
-			<a class="{MAILBUTTONCSS} float_left" href="javascript:void()" onClick="javascript:{FUNKTION}" title="Kunde eine Mail schreiben und Bestellung abschließen" ></a>
-			<a class="delete_button" href="javascript:void()" onclick="javascript:delete_item('{WAS}', '{BESTELLID}')" title="Bestellung löschen"></a>
+			<a class="update_button float_left" href="javascript:void(0)" onClick="javascript:showBestellDaten({BESTELLID})" title="Bestellung einsehen" ></a>
+			<a class="{MAILBUTTONCSS} float_left" href="javascript:void(0)" onClick="javascript:{FUNKTION}" title="Kunde eine Mail schreiben und Bestellung abschließen" ></a>
+			<a class="delete_button" href="javascript:void(0)" onclick="javascript:delete_item('{WAS}', '{BESTELLID}')" title="Bestellung löschen"></a>
 		</li>
 	
 	<!-- END LISTE -->

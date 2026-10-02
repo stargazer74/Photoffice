@@ -28,4 +28,8 @@ RUN pear install DB \
 # Enable apache mod_rewrite
 RUN a2enmod rewrite
 
+# Set a default timezone to avoid "getdate(): It is not safe to rely on
+# the system's timezone settings" warnings (which break header() calls)
+RUN echo "date.timezone = Europe/Berlin" > /usr/local/etc/php/conf.d/timezone.ini
+
 WORKDIR /var/www/html

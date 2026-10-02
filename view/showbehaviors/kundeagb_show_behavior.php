@@ -32,7 +32,7 @@ class kundeagb_show_behavior implements showbehavior
 		$this->tpl->addBlockfile('CONTENTBLOCK', 'allecontentbox', 'kundencontentbox.tpl');
 		$this->tpl->touchBlock('KUNDENCONTENT');
 		
-		$breadcrumbInstance = new breadcrumb('AGB');
+		$breadcrumbInstance = new breadcrumb('AGB', 'kundenindex.html');
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
 		if (is_array($breadcrumbArray))
 		{
@@ -45,14 +45,14 @@ class kundeagb_show_behavior implements showbehavior
 			}
 		}
 
-		$this->tpl->addBlockfile('CONTENT', 'content', 'kundeagb.tpl');
-		$this->tpl->touchBlock('KUNDEAGB');
-		
 		$db = new database();
 		$agb = $db->_getFirmenDaten();
 		$agb = $agb[0]['agb'];
-		
+
+		$this->tpl->addBlockfile('CONTENT', 'content', 'kundeagb.tpl');
+		$this->tpl->setCurrentBlock('KUNDEAGB');
 		$this->tpl->setVariable('AGB', $agb);
+		$this->tpl->parseCurrentBlock('KUNDEAGB');
 		
 		$view = view::_getViewInstance();
 		$view->_setShowBehavior(new kundenstatusbox_show_behavior);

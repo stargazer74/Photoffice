@@ -10,8 +10,8 @@
 		<li class="autowidth {LISTBACKGROUND}">
 			<div class="kundenliste float_left" style="width: 150px;">{NAME}</div>
 			<div class="kundenliste float_left" style="width: 150px;">{LOGINNAME}</div>
-			<a class="update_button float_left" href="javascript:void()" onClick="javascript:showFotografenAendern({FOTOGRAFENID})" title="Fotografendaten ändern" ></a>
-			<a class="delete_button" href="javascript:void()" onclick="javascript:delete_fotograf('fotograf', '{FOTOGRAFENID}')" title="löscht den Fotorafen"></a>
+			<a class="update_button float_left" href="javascript:void(0)" onClick="javascript:showFotografenAendern({FOTOGRAFENID})" title="Fotografendaten ändern" ></a>
+			<a class="delete_button" href="javascript:void(0)" onclick="javascript:delete_fotograf('fotograf', '{FOTOGRAFENID}')" title="löscht den Fotorafen"></a>
 
 		</li>
 	

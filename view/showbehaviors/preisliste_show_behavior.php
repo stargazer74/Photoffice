@@ -32,7 +32,7 @@ class preisliste_show_behavior implements showbehavior
 		$this->tpl->addBlockfile('CONTENTBLOCK', 'allecontentbox', 'kundencontentbox.tpl');
 		$this->tpl->touchBlock('KUNDENCONTENT');
 		
-		$breadcrumbInstance = new breadcrumb('Preisliste');
+		$breadcrumbInstance = new breadcrumb('Preisliste', 'kundenindex.html');
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
 		if (is_array($breadcrumbArray))
 		{
@@ -68,6 +68,7 @@ class preisliste_show_behavior implements showbehavior
 		//print_r($allePreiseArraySort);
 		foreach ($allePreiseArraySort as $key => $data)
 		{
+			$this->tpl->setCurrentBlock('PREISTABELLE');
 			$this->tpl->setVariable('PAPIERTYP', $key);
 			foreach ($data as $formate)
 			{

@@ -8,6 +8,19 @@
         <link href="./view/css/{CSS}.css" rel="stylesheet" type="text/css" />
         <!-- END CSSINCLUDES -->
         <script type="text/javascript" src="./view/js/jquery-2.1.1.js"></script>
+        <script type="text/javascript">
+            // jquery.tools.min.js (history-Feature von .tabs()) greift auf $.browser
+            // zu, das jQuery seit Version 1.9 nicht mehr liefert.
+            if (!$.browser) {
+                $.browser = { msie: /trident|msie/i.test(navigator.userAgent), version: '0' };
+            }
+            // jquery.fancybox-1.3.1.pack.js prüft $.support.opacity, das es seit
+            // jQuery 1.9 nicht mehr gibt - ohne den Shim nimmt Fancybox fälschlich
+            // den alten IE-Fallback (style.removeAttribute("filter")).
+            if ($.support && typeof $.support.opacity === 'undefined') {
+                $.support.opacity = true;
+            }
+        </script>
         <!-- BEGIN JSINCLUDES -->
         <script type="text/javascript" src="./view/js/{JAVASCRIPT}.js"></script>
         <!-- END JSINCLUDES -->

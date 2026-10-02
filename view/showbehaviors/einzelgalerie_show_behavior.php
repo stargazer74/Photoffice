@@ -107,7 +107,7 @@ class einzelgalerie_show_behavior implements showbehavior
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
 		if (is_array($breadcrumbArray))
 		{
-			$aktuelleGalerieNaviPoint = array($aktuelleGalerie['galeriename'] => 'javascript:void()');
+			$aktuelleGalerieNaviPoint = array($aktuelleGalerie['galeriename'] => 'javascript:void(0)');
 			$breadcrumbArray = array_merge($breadcrumbArray, $aktuelleGalerieNaviPoint);
 			foreach($breadcrumbArray as $key => $data)
 			{

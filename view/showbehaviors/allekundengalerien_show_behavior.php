@@ -22,6 +22,10 @@ class allekundengalerien_show_behavior implements showbehavior
 		
 		//JavaScript Includes
 		$this->tpl->setCurrentBlock('JSINCLUDES');
+		$this->tpl->setVariable('JAVASCRIPT', 'animatedcollapse');
+		$this->tpl->parseCurrentBlock();
+
+		$this->tpl->setCurrentBlock('JSINCLUDES');
 		$this->tpl->setVariable('JAVASCRIPT', 'kundensicht');
 		$this->tpl->parseCurrentBlock();
 		
@@ -38,7 +42,7 @@ class allekundengalerien_show_behavior implements showbehavior
 		$this->tpl->addBlockfile('CONTENTBLOCK', 'allecontentbox', 'kundencontentbox.tpl');
 		$this->tpl->touchBlock('KUNDENCONTENT');
 		
-		$breadcrumbInstance = new breadcrumb('Bilder');
+		$breadcrumbInstance = new breadcrumb('Bilder', 'kundenindex.html');
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
 		if (is_array($breadcrumbArray))
 		{

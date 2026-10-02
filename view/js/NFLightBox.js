@@ -71,13 +71,17 @@
             // Configuration related to navigation
             fixedNavigation: false,
             // Configuration related to images
-            imageLoading: 'images/loading.gif',
+            // fancy_loading.png ist ein 40x480-Sprite mit 12 Animationsframes
+            // fuer eine CSS-background-position-Animation (siehe fancybox.css)
+            // - als <img> zeigt es alle Frames gestapelt. Da es im Projekt
+            // keinen passenden Einzel-Spinner gibt, bleibt die Ladeanzeige leer.
+            imageLoading: './view/images/blank.gif',
             imageBtnPrev: './view/images/fancy_nav_left.png',
             imageBtnNext: './view/images/fancy_nav_right.png',
             imageBtnClose: './view/images/fancy_close.png',
-            imageBlank: 'images/lightbox-blank.gif',
-            imageBtnBottomPrev: 'images/btm_prev.gif',
-            imageBtnBottomNext: 'images/btm_next.gif',
+            imageBlank: './view/images/blank.gif',
+            imageBtnBottomPrev: './view/images/fancy_nav_left.png',
+            imageBtnBottomNext: './view/images/fancy_nav_right.png',
             imageBtnPlay: './view/images/fancy_play.png',
             imageBtnStop: './view/images/pause.png',
             // Configuration related to container image box
@@ -143,7 +147,7 @@
         function _set_interface() {
             // Apply the HTML markup into body tag
             //$('body').append('<div id="jquery-overlay" /><div id="jquery-box"><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image-box-top"><div id="lightbox-container-image-box-top-left"><img src="' + settings.imageBtnPlay + '"></div><div id="lightbox-container-image-box-top-middle"></div><div id="lightbox-container-image-box-top-right"><img src="' + settings.imageBtnClose + '"></div></div><div id="lightbox-container-image"><img id="lightbox-image"/></div><div id="lightbox-nav" style="display: block;"><a id="lightbox-nav-btnPrev" href="#" /><a id="lightbox-nav-btnNext" href="#" /></div><div id="lightbox-loading" style="display: none;"><a id="lightbox-loading-link" href="#"><img src="' + settings.imageLoading + '"></a></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><span id="lightbox-image-details-caption">Image name</span> <span id="lightbox-image-details-currentNumber"></span>&nbsp;|&nbsp;<div id="lightbox-image-details-previous-image"><img src="' + settings.imageBtnBottomPrev + '"><span id="lightbox-image-details-previous-text">' + settings.txtPrev + '</span>&nbsp;</div><div id="lightbox-image-details-next-image"><img src="' + settings.imageBtnBottomNext + '"><span id="lightbox-image-details-next-text">' + settings.txtNext + '</span></div></div></div></div>');
-            $('body').append('<div id="jquery-overlay" /><div id="jquery-box"><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image-box-top"><div id="lightbox-container-image-box-top-left"><img src="' + settings.imageBtnPlay + '"></div><div id="lightbox-container-image-box-top-middle"></div><div id="lightbox-container-image-box-top-right"><img src="' + settings.imageBtnClose + '"></div></div><div id="lightbox-container-image"><img id="lightbox-image"/></div><div id="lightbox-nav" style="display: block;"><a id="lightbox-nav-btnPrev" href="#" title="' + settings.txtPrev + '" /><a id="lightbox-nav-btnNext" href="#" title="' + settings.txtNext + '" /></div><div id="lightbox-loading" style="display: none;"><a id="lightbox-loading-link" href="#"><img src="' + settings.imageLoading + '"></a></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><span id="lightbox-image-details-caption">Image name</span> <span id="lightbox-image-details-currentNumber"></span>&nbsp;|&nbsp;<div id="lightbox-image-details-previous-image"><img src="' + settings.imageBtnBottomPrev + '" alt="' + settings.txtPrev + '">&nbsp;</div><div id="lightbox-image-details-next-image"><img src="' + settings.imageBtnBottomNext + '" alt="' + settings.txtNext + '"></div></div></div></div>');
+            $('body').append('<div id="jquery-overlay" /><div id="jquery-box"><div id="jquery-lightbox"><div id="lightbox-container-image-box"><div id="lightbox-container-image-box-top"><div id="lightbox-container-image-box-top-left"><img src="' + settings.imageBtnPlay + '"></div><div id="lightbox-container-image-box-top-middle"></div><div id="lightbox-container-image-box-top-right"><img src="' + settings.imageBtnClose + '"></div></div><div id="lightbox-container-image"><img id="lightbox-image"/></div><div id="lightbox-nav" style="display: block;"><a id="lightbox-nav-btnPrev" href="#" title="' + settings.txtPrev + '" /><a id="lightbox-nav-btnNext" href="#" title="' + settings.txtNext + '" /></div><div id="lightbox-loading" style="display: none;"><a id="lightbox-loading-link" href="#"><img src="' + settings.imageLoading + '"></a></div></div><div id="lightbox-container-image-data-box"><div id="lightbox-container-image-data"><span id="lightbox-image-details-caption">Image name</span> <span id="lightbox-image-details-currentNumber"></span></div></div></div>');
 
             $('#lightbox-container-image-box').corner();
             $('#lightbox-container-image-data-box').corner();

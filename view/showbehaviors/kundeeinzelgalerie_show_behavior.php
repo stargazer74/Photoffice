@@ -79,11 +79,11 @@ class kundeeinzelgalerie_show_behavior implements showbehavior
 		$this->tpl->addBlockfile('CONTENTBLOCK', 'allecontentbox', 'kundencontentbox.tpl');
 		$this->tpl->touchBlock('KUNDENCONTENT');
 
-		$breadcrumbInstance = new breadcrumb('Bilder');
+		$breadcrumbInstance = new breadcrumb('Bilder', 'kundenindex.html');
 		$breadcrumbArray = $breadcrumbInstance->_getBreadcrumbArray();
 		if (is_array($breadcrumbArray))
 		{
-			$aktuelleGalerieNaviPoint = array($aktuelleGalerie['galeriename'] => 'javascript:void()');
+			$aktuelleGalerieNaviPoint = array($aktuelleGalerie['galeriename'] => 'javascript:void(0)');
 			$breadcrumbArray = array_merge($breadcrumbArray, $aktuelleGalerieNaviPoint);
 			foreach($breadcrumbArray as $key => $data)
 			{
@@ -153,6 +153,9 @@ class kundeeinzelgalerie_show_behavior implements showbehavior
 		$view->_Show();
 
 		$view->_setShowBehavior(new bestellungbox_show_behavior());
+		$view->_Show();
+
+		$view->_setShowBehavior(new warenkorbbox_show_behavior());
 		$view->_Show();
 
 		$this->tpl->show();

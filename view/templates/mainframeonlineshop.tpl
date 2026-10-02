@@ -7,7 +7,17 @@
         <!-- BEGIN CSSINCLUDES -->
         <link href="./view/css/{CSS}.css" rel="stylesheet" type="text/css" />
         <!-- END CSSINCLUDES -->
-        <script type="text/javascript" src="./view/js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="./view/js/jquery-2.1.1.js"></script>
+        <script type="text/javascript">
+            // NFLightBox.js greift auf $.browser zu, das jQuery seit Version 1.9
+            // nicht mehr liefert.
+            if (!$.browser) {
+                $.browser = { msie: /trident|msie/i.test(navigator.userAgent), version: '0' };
+            }
+            if ($.support && typeof $.support.opacity === 'undefined') {
+                $.support.opacity = true;
+            }
+        </script>
         <!-- BEGIN JSINCLUDES -->
         <script type="text/javascript" src="./view/js/{JAVASCRIPT}.js"></script>
         <!-- END JSINCLUDES -->

@@ -2,7 +2,7 @@
 <div id="main_navigation">
         <a href="bilder.html" id="{BUTTON_GALERIEN}"></a>
 
-        <a href="javascript:void()" id="{BUTTON_HOMEPAGE}"></a>
+        <a href="javascript:void(0)" id="{BUTTON_HOMEPAGE}"></a>
 
         <a href="kunden.html" id="{BUTTON_KUNDEN}"></a>
 

@@ -29,6 +29,7 @@ require_once('Mail.php');
 //
 ////////////////////////////////////////////////////////////////////////////////////
 require_once('./controller/actionbehaviors/standard_action_behavior.php');
+require_once('./controller/actionbehaviors/kundestandard_action_behavior.php');
 require_once('./controller/actionbehaviors/ajaxdelete_action_behavior.php');
 require_once('./controller/actionbehaviors/kundedelete_action_behavior.php');
 require_once('./controller/actionbehaviors/applicationstate_action_behavior.php');

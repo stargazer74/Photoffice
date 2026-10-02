@@ -19,7 +19,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: fotoffice
     volumes:
-      - ./photoffice.sql:/docker-entrypoint-initdb.d/photoffice.sql
+      - ./photoffice.sql:/docker-entrypoint-initdb.d/01-photoffice.sql
+      - ./photoffice_seed.sql:/docker-entrypoint-initdb.d/02-photoffice_seed.sql
       - db_data:/var/lib/mysql
     restart: unless-stopped
 

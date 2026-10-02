@@ -64,7 +64,7 @@ $(document).ready(function() {
 		<div style="margin-left: 10px; margin: 2px; width: 200px; float: left;">{PREISLISTEPAPIERFORMAT}</div>
 		<div style="margin-left: 10px; margin: 2px; width: 80px; float: left;">{PREIS}
 		€</div>
-		<a class="delete_button" href="javascript:void()"
+		<a class="delete_button" href="javascript:void(0)"
 			onclick="javascript:delete_item('{WAS}', new Array('{IDPAPIER}', '{IDBILD}'))"
 			title="löscht den Preis"></a></li>
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 		<!-- BEGIN LISTEBILDFORMATE -->
 		<li class="autowidth {LISTBACKGROUND}">
 		<div style="margin-left: 10px; margin: 2px; width: auto; float: left;">{BILDFORMAT}</div>
-		<a class="delete_button" href="javascript:void()" onclick="javascript:delete_item('{WAS}', '{ID}')" title="löscht das Bildformat"></a></li>
+		<a class="delete_button" href="javascript:void(0)" onclick="javascript:delete_item('{WAS}', '{ID}')" title="löscht das Bildformat"></a></li>
 		<!-- END LISTEBILDFORMATE -->
 	</ul>
 	</div>
@@ -125,7 +125,7 @@ $(document).ready(function() {
 		<li class="autowidth {LISTBACKGROUND}">
 		<div style="margin-left: 10px; margin: 2px; width: auto; float: left;">{PAPIERFORMAT}</div>
 
-		<a class="delete_button" href="javascript:void()" onclick="javascript:delete_item('{WAS}', {ID})" title="löscht das Papierformat"></a></li>
+		<a class="delete_button" href="javascript:void(0)" onclick="javascript:delete_item('{WAS}', {ID})" title="löscht das Papierformat"></a></li>
 		<!-- END LISTEPAPIERFORMATE -->
 	</ul>
 	</div>
@@ -158,7 +158,7 @@ $(document).ready(function() {
 		<li class="autowidth {LISTBACKGROUND}">
 		<div style="margin-left: 10px; margin: 2px; width: 200px; float: left;">{VERSANDART}</div>
 		<div style="margin-left: 10px; margin: 2px; width: 80px; float: left;">{VERSANDKOSTEN} €</div>
-		<a class="delete_button" href="javascript:void()" onclick="javascript:delete_item('{WAS}', '{ID}')" title="löscht das Porto"></a></li>
+		<a class="delete_button" href="javascript:void(0)" onclick="javascript:delete_item('{WAS}', '{ID}')" title="löscht das Porto"></a></li>
 
 		<!-- END LISTEPORTO -->
 	</ul>

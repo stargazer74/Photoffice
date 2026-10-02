@@ -20,7 +20,7 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<p>{BILDNAME}</p>
-			<a class="delete_picture_button" href="javascript:void()" onclick="delete_picture('bild', {PICTUREID})"></a>
+			<a class="delete_picture_button" href="javascript:void(0)" onclick="delete_picture('bild', {PICTUREID})"></a>
 		</div>
 	<!-- END BILD -->
 <!-- END BILDUEBERSICHT -->
